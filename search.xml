@@ -25,27 +25,6 @@
       </tags>
   </entry>
   <entry>
-    <title>多益网络面试记录</title>
-    <url>/2021/03/12/%E5%A4%9A%E7%9B%8A%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>多益网络一面面试问题记录</p>
-<span id="more"></span>
-
-<ol>
-<li>什么是面向对象？面向对象和面向过程有什么区别？</li>
-<li>ArrayList和LinkedList有什么区别？</li>
-<li>链表和数组有什么区别？在什么时候应该使用链表/数组？</li>
-<li>HashMap的实现方式，HashMap的底层数据结构是什么？</li>
-<li>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</li>
-<li>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</li>
-<li>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</li>
-<li>数据库事物的四个基本特性是什么？</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>面试记录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面向对象和面向过程</title>
     <url>/2021/03/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="什么是面向对象？什么又是面向过程"><a href="#什么是面向对象？什么又是面向过程" class="headerlink" title="什么是面向对象？什么又是面向过程"></a>什么是面向对象？什么又是面向过程</h3><span id="more"></span>
@@ -68,6 +47,27 @@
 ]]></content>
       <tags>
         <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多益网络面试记录</title>
+    <url>/2021/03/12/%E5%A4%9A%E7%9B%8A%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>多益网络一面面试问题记录</p>
+<span id="more"></span>
+
+<ol>
+<li>什么是面向对象？面向对象和面向过程有什么区别？</li>
+<li>ArrayList和LinkedList有什么区别？</li>
+<li>链表和数组有什么区别？在什么时候应该使用链表/数组？</li>
+<li>HashMap的实现方式，HashMap的底层数据结构是什么？</li>
+<li>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</li>
+<li>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</li>
+<li>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</li>
+<li>数据库事物的四个基本特性是什么？</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>面试记录</tag>
       </tags>
   </entry>
 </search>
