@@ -19,7 +19,7 @@
 <li>2、DNS解析</li>
 <li>3、建立tcp连接</li>
 <li>4、客户端发送HTPP请求</li>
-<li>5、服务器处理请求<a href="https://www.cnblogs.com/xianyulaodi/p/6547807.html#_label6">　</a></li>
+<li>5、服务器处理请求</li>
 <li>6、服务器响应请求</li>
 <li>7、浏览器展示HTML</li>
 <li>8、浏览器发送请求获取其他在HTML中的资源。</li>
@@ -27,7 +27,7 @@
 <span id="more"></span>
 
 <h4 id="1-域名解析"><a href="#1-域名解析" class="headerlink" title="1.域名解析"></a>1.域名解析</h4><p>当我们在浏览器中输入一个URL的时候首先需要解析为IP地址，这一过程叫做DNS解析</p>
-<p>DNS解析是一个递归查询的过程，例如我们解析“<a href="http://www.baidu.com”时过程是这样的：">www.baidu.com”时过程是这样的：</a></p>
+<p>DNS解析是一个递归查询的过程，例如我们解析“<a href="http://www.baidu.com”/">www.baidu.com”</a>    时过程是这样的：</p>
 <ul>
 <li>在本地域名服务器中查询IP地址，未找到域名</li>
 <li>本地域名服务器向根域名服务器发送请求，未找到域名</li>
