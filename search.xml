@@ -3,25 +3,69 @@
   <entry>
     <title>Hello World</title>
     <url>/2021/03/11/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
+    <content><![CDATA[<h1 id="KEEP-THINKING-KEEP-CODING"><a href="#KEEP-THINKING-KEEP-CODING" class="headerlink" title="KEEP THINKING ,KEEP CODING"></a>KEEP THINKING ,KEEP CODING</h1>]]></content>
       <categories>
         <category>测试</category>
       </categories>
       <tags>
         <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCP和UDP</title>
+    <url>/2021/03/14/TCP%E5%92%8CUDP/</url>
+    <content><![CDATA[<h4 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h4><ul>
+<li>TCP是面向连接的，UDP是面向无连接的。</li>
+<li>UDP程序结构较为简单。</li>
+<li>TCP是面向字节流的，UDP是基于数据报的。</li>
+<li>TCP保证数据正确性，UDP可能丢包。</li>
+<li>TCP保证数据顺序，UDP不保证</li>
+</ul>
+<h4 id="什么是UDP"><a href="#什么是UDP" class="headerlink" title="什么是UDP"></a>什么是UDP</h4><p>UDP的包头：</p>
+<p><img src="https://static001.geekbang.org/resource/image/6d/bf/6d1313f51b9dfd7ab454b2cef1cb37bf.jpg" alt="UDP 包头"></p>
+<ul>
+<li>两个十六位的端口号，分别为源端口和目标端口。</li>
+<li>整个数据报文的长度。</li>
+<li>整个数据报文的校验和，该字段用于发现头部信息和数据中的错误。</li>
+</ul>
+<h5 id="UDP的特点"><a href="#UDP的特点" class="headerlink" title="UDP的特点"></a>UDP的特点</h5><ul>
+<li>沟通简单，不需要大量的数据结构、处理逻辑和包头字段</li>
+<li>不会建立连接，但是会监听这个地方，谁都可以传给它数据，它也可以传给任何人数据，甚至可以同时传给多个人。</li>
+<li>不会根据网络的情况进行拥塞控制，无论是否丢包都会一直发送</li>
+</ul>
+<p>因此UDP在传输报文时是很高效的</p>
+<h4 id="什么是TCP"><a href="#什么是TCP" class="headerlink" title="什么是TCP"></a>什么是TCP</h4><p>TCP的包头格式：</p>
+<p><img src="https://static001.geekbang.org/resource/image/a7/bf/a795461effcce686a43f48e094c9adbf.jpg" alt="TCP 包头"></p>
+<ul>
+<li>首先是源端口和目标端口</li>
+<li>接下来是包的序号，主要为了解决乱序问题</li>
+<li>确认序号，发出去的包应该有确认，这样能知道对方是否收到，如果没收到就应该重新发送，解决丢包的问题</li>
+<li>状态位。SYN是发起一个链接，ACK是回复，RST是重新连接，FIN是结束连接。因为TCP是面向连接的，因此需要双方维护连接的状态，这些状态位的包会引起双方的状态变更。</li>
+<li>窗口大小，TCP要做流量控制，需要通信双方各声明一个窗口，标记自己当前的处理能力</li>
+</ul>
+<h5 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h5><ol>
+<li><p>主机A通过向主机B发送一个含有同步序列号标志位的数据段（SYN）给主机B，向主机B请求建立连接，通过这个数据段，主机A告诉主机B两件事：我想要和你通信；你可以用哪个序列号作为起始数据段来回应我。</p>
+</li>
+<li><p>主机B收到主机A的请求后，用一个带有确认应答(ACK)和同步序列号(SYN)标志位的数据段响应主机A，也告诉主机A两件事：我已经收到你的请求了，你可以传输数据了；你要用哪个序列号作为起始数据段来回应我。</p>
+</li>
+<li><p>主机A收到这个数据段后，再发送一个确认应答，确认已收到主机B的数据段</p>
+<p>这样三次握手就完成了，主机AB就可以传输数据了</p>
+</li>
+</ol>
+<h5 id="TCP的四次挥手"><a href="#TCP的四次挥手" class="headerlink" title="TCP的四次挥手"></a>TCP的四次挥手</h5><ol>
+<li>当主机A完成数据传输后，将控制位FIN置为1，提出停止TCP连接的请求</li>
+<li>主机B收到FIN后对其作出响应，确认这一方向的TCP连接将关闭，将ACK置为1</li>
+<li>由主机B端再提出反方向的关闭请求，将FIN置为1</li>
+<li>主机A队主机B的请求进行确认，将ACK置为1，双方向的关闭结束</li>
+</ol>
+<h4 id="TCP的三次握手目的是什么？为什么不用两次和四次？"><a href="#TCP的三次握手目的是什么？为什么不用两次和四次？" class="headerlink" title="TCP的三次握手目的是什么？为什么不用两次和四次？"></a>TCP的三次握手目的是什么？为什么不用两次和四次？</h4><p><strong>TCP 三次握手的主要目的是防止失效的连接请求报文被服务端接受</strong></p>
+<p>  如果只有两次握手，假设当客户端发送第一次连接请求由于网络拥塞的原因，迟迟未到服务端，客户端没接收到确认报文，认为服务端没有收到，于是重新发送请求报文并与服务端建立连接，等这次连接断开了，之前滞留的那个请求报文又到达了服务端，就会让服务端与客户端再次连接成功，这时服务端就会一直等待客户端发送请求，造成了资源的浪费。</p>
+<p>  两次握手只能保证单向链路是可以通信的，理论上来说，要保证双向链路可以通信需要四次握手，但实际上服务端给客户端的 SYN 和 ACK 数据包可以合为一次握手，所以实际上只需要三次握手即可。</p>
+<h4 id="挥手为什么需要四次？三次不行吗？"><a href="#挥手为什么需要四次？三次不行吗？" class="headerlink" title="挥手为什么需要四次？三次不行吗？"></a>挥手为什么需要四次？三次不行吗？</h4><p>挥手阶段中服务端的 ACK 和 FIN 数据包不能合为一次。因为挥手阶段的流程为客户端发送FIN数据包表示自己发完了，服务端立即回复 ACK 数据包表示自己知道了，此时客户端到服务端的连接已经释放了，客户端不会再发送数据了，但服务端还可以继续向客户端发送数据，等到服务端也完成了数据发送，才会发送 FIN，这时客户端回复 ACK，就可以结束通信了。</p>
+<h4 id="TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？"><a href="#TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？" class="headerlink" title="TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？"></a>TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？</h4><p>因为客户端要保证他的 ACK 包顺利到达服务端，如果客户端的ACK数据包丢失，则服务端或重新发送 FIN 包到客户端，而这两个过程的最长时间为 1MSL，加起来为 2MSL，如果 2MSL 后客户端还没有收到服务端重发的 FIN 包，则说明 ACK 包顺利到达，可以关闭连接了。</p>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -56,15 +100,39 @@
 <span id="more"></span>
 
 <ol>
-<li>什么是面向对象？面向对象和面向过程有什么区别？</li>
-<li>ArrayList和LinkedList有什么区别？</li>
-<li>链表和数组有什么区别？在什么时候应该使用链表/数组？</li>
-<li>HashMap的实现方式，HashMap的底层数据结构是什么？</li>
-<li>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</li>
-<li>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</li>
-<li>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</li>
-<li>数据库事物的四个基本特性是什么？</li>
+<li><p>什么是面向对象？面向对象和面向过程有什么区别？</p>
+<p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
+<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
+</li>
+<li><p>ArrayList和LinkedList有什么区别？</p>
+<p>ArrayList是Array(动态数组)的数据结构，LinkedList是Link(链表)的数据结构。</p>
+<p>当随机访问List（get和set操作）时，ArrayList比LinkedList的效率更高，因为LinkedList是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p>
+<p>当对数据进行增加和删除的操作(add和remove操作)时，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
+<p>ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
+<p>ArrayList主要控件开销在于需要在lList列表预留一定空间；而LinkList主要控件开销在于需要存储结点信息以及结点指针信息。</p>
+</li>
+<li><p>链表和数组有什么区别？在什么时候应该使用链表/数组？</p>
+<p>数组便于查询，链表便于插入删除。数组节省空间但是长度固定，链表虽然变长但是占了更多的存储空间。</p>
+</li>
+<li><p>HashMap的实现方式，HashMap的底层数据结构是什么？</p>
+<p>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。</p>
+<p>HashMap的底层数据结构是数组+链表</p>
+<p>当链表长度大于等于8时会转换为红黑树</p>
+</li>
+<li><p>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</p>
+<p>快慢指针解决，时间复杂度为O(n)</p>
+</li>
+<li><p>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</p>
+<p>是指不提供加锁机制保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据。</p>
+<p>实现线程安全可以用Lock和synchronized</p>
+</li>
+<li><p>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</p>
+<p>回溯算法解决，时间复杂度：O*(<em>n</em>×*n!)，其中 n为序列的长度</p>
+</li>
+<li><p>数据库事物的四个基本特性是什么？</p>
+</li>
 </ol>
+<p>原子性、一致性、隔离性、持久性</p>
 ]]></content>
       <tags>
         <tag>面试记录</tag>

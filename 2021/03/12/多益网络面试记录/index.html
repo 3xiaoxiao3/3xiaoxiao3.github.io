@@ -87,7 +87,7 @@
 <meta property="og:description" content="多益网络一面面试问题记录">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-12T08:14:54.000Z">
-<meta property="article:modified_time" content="2021-03-14T02:12:26.430Z">
+<meta property="article:modified_time" content="2021-03-15T00:48:07.151Z">
 <meta property="article:author" content="小小">
 <meta property="article:tag" content="面试记录">
 <meta name="twitter:card" content="summary">
@@ -360,15 +360,39 @@
 <span id="more"></span>
 
 <ol>
-<li>什么是面向对象？面向对象和面向过程有什么区别？</li>
-<li>ArrayList和LinkedList有什么区别？</li>
-<li>链表和数组有什么区别？在什么时候应该使用链表/数组？</li>
-<li>HashMap的实现方式，HashMap的底层数据结构是什么？</li>
-<li>算法题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</li>
-<li>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</li>
-<li>算法题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</li>
-<li>数据库事物的四个基本特性是什么？</li>
+<li><p>什么是面向对象？面向对象和面向过程有什么区别？</p>
+<p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
+<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
+</li>
+<li><p>ArrayList和LinkedList有什么区别？</p>
+<p>ArrayList是Array(动态数组)的数据结构，LinkedList是Link(链表)的数据结构。</p>
+<p>当随机访问List（get和set操作）时，ArrayList比LinkedList的效率更高，因为LinkedList是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p>
+<p>当对数据进行增加和删除的操作(add和remove操作)时，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
+<p>ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
+<p>ArrayList主要控件开销在于需要在lList列表预留一定空间；而LinkList主要控件开销在于需要存储结点信息以及结点指针信息。</p>
+</li>
+<li><p>链表和数组有什么区别？在什么时候应该使用链表/数组？</p>
+<p>数组便于查询，链表便于插入删除。数组节省空间但是长度固定，链表虽然变长但是占了更多的存储空间。</p>
+</li>
+<li><p>HashMap的实现方式，HashMap的底层数据结构是什么？</p>
+<p>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。</p>
+<p>HashMap的底层数据结构是数组+链表</p>
+<p>当链表长度大于等于8时会转换为红黑树</p>
+</li>
+<li><p>算法题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</p>
+<p>快慢指针解决，时间复杂度为O(n)</p>
+</li>
+<li><p>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</p>
+<p>是指不提供加锁机制保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据。</p>
+<p>实现线程安全可以用Lock和synchronized</p>
+</li>
+<li><p>算法题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</p>
+<p>回溯算法解决，时间复杂度：O*(<em>n</em>×*n!)，其中 n为序列的长度</p>
+</li>
+<li><p>数据库事物的四个基本特性是什么？</p>
+</li>
 </ol>
+<p>原子性、一致性、隔离性、持久性</p>
 
       
     </div>
@@ -479,7 +503,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -501,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
