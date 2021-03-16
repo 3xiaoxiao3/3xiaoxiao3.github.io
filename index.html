@@ -502,57 +502,15 @@
 
       
         
-          
-            <h3 id="一、HTTP和HTTPS的基本概念"><a href="#一、HTTP和HTTPS的基本概念" class="headerlink" title="一、HTTP和HTTPS的基本概念"></a>一、HTTP和HTTPS的基本概念</h3><p>HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器请求和应答的标准(TCP)，用于从Web服务器传输超文本到本地浏览器的传输协议。</p>
+          <h3 id="一、HTTP和HTTPS的基本概念"><a href="#一、HTTP和HTTPS的基本概念" class="headerlink" title="一、HTTP和HTTPS的基本概念"></a>一、HTTP和HTTPS的基本概念</h3><p>HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器请求和应答的标准(TCP)，用于从Web服务器传输超文本到本地浏览器的传输协议。</p>
 <p>HTTPS：是以安全为目标的HTTP通道，即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。HTTP开发的主要目的是提供对网站服务器的身份认证，保护交换数据的隐私和完整性</p>
-<h3 id="二、HTTP的工作原理"><a href="#二、HTTP的工作原理" class="headerlink" title="二、HTTP的工作原理"></a>二、HTTP的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130120012190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>客户端与服务器建立TCP连接(三次握手)</li>
-<li>连接成功后，客户端发送请求给服务器</li>
-<li>服务器接收到客户端发送的消息后作出响应，并将响应信息发给客户端</li>
-<li>服务器发送玩响应信息后，就会断开TCP连接，因此HTTP是无状态的，下一次访问的时候不知道之前访问的过程</li>
-<li>客户端收到响应信息，浏览器开始解析，将HTML文档解析后呈现在浏览器上</li>
-</ol>
-<h3 id="三、HTTPS的工作原理"><a href="#三、HTTPS的工作原理" class="headerlink" title="三、HTTPS的工作原理"></a>三、HTTPS的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130113922972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li><p>客户端发起HTTPS请求</p>
-<p>用户在浏览器中输入一个HTTPS网址，连接到server的443端口</p>
-</li>
-<li><p>传送证书</p>
-<p>采用HTTPS协议的服务器必须要有一套数字证书，这套证书其实就是一对公钥和私钥。</p>
-<p>服务器将证书发送给客户端，这个证书其实就是公钥，只是包含了很多信息，比如证书的颁发机构，过期时间等</p>
-</li>
-<li><p>客户端解析证书</p>
-<p>这部分工作是由客户端的TLS完成的，首先会验证公钥是否有效，如果发现异常就会弹出一个警告，提示证书存在问题</p>
-</li>
-<li><p>生成随机秘钥</p>
-<p>如果证书没有问题，那就生成一个随机对称秘钥</p>
-</li>
-<li><p>加密对称秘钥</p>
-<p>公钥队该对称秘钥进行加密。</p>
-</li>
-<li><p>传送加密信息</p>
-<p>将加密后的对称秘钥发送给服务器，目的是让服务端得到对称秘钥，这样以后客户端和服务端的通信就可以通过这个对称秘钥进行加密和解密了。</p>
-</li>
-<li><p>服务端解密信息</p>
-<p>服务端用私钥解密后便得到客户端传过来的对称秘钥，然后把内容通过该秘钥进行对称加密</p>
-<p>所谓对称加密就是将信息和对称秘钥通过算法混合在一起，这样除非知道对称秘钥，不然无法获取内容。</p>
-</li>
-<li><p>传输加密后的信息</p>
-<p>这部分信息是服务器用对称秘钥加密后的信息，可以在客户端被还原</p>
-</li>
-<li><p>客户端解密信息</p>
-<p>客户端用之前生成的对称秘钥解密服务端传过来的信息，获取内容。</p>
-</li>
-</ol>
-<h3 id="四、HTTP和HTTPS的区别"><a href="#四、HTTP和HTTPS的区别" class="headerlink" title="四、HTTP和HTTPS的区别"></a>四、HTTP和HTTPS的区别</h3><ol>
-<li>HTTPS协议需要到CA申请证书，一般免费证书较少，因而需要一定费用</li>
-<li>HTTP是超文本传输协议，信息是明文传输的，数据是不加密的，而HTTPS则是具有安全性的SSL加密传输协议。</li>
-<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，HTTP是80端口而HTTPS是443端口</li>
-<li>HTTP的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比HTTP协议要安全</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/16/HTTP%E4%B8%8EHTTPS/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
