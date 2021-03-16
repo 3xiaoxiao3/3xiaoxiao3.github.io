@@ -12,6 +12,24 @@
       </tags>
   </entry>
   <entry>
+    <title>高频考点：ArrayList和LinkedList</title>
+    <url>/2021/03/16/%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%9AArrayList%E5%92%8CLinkedList/</url>
+    <content><![CDATA[<h3 id="ArrayList和LinkedList的主要区别"><a href="#ArrayList和LinkedList的主要区别" class="headerlink" title="ArrayList和LinkedList的主要区别"></a>ArrayList和LinkedList的主要区别</h3><span id="more"></span>
+
+<p>1.LinkedList和ArrayList的差别主要来源于其二者的数据结构不同。<strong>ArrayList是基于动态数组实现的</strong>，<strong>LinkedList是基于双链表实现的</strong>。另外LinkedList类可以根据索引来随机访问集合中的元素，还实现了Deque接口，Deque接口是Queue接口的子接口，代表了一个双向队列，因此LinkedList可以作为双向队列、栈和List集合使用</p>
+<p>2.因为Array是基于索引的数据结构，它使用索引在数组中搜索和读取数据时很快的，可以直接返回数组中index位置的元素，因此在随机访问集合元素上有较好的性能。Array获取数据的时间复杂度是O(1)，<strong>但是要插入、删除数据时开销会很大，因为需要移动数组中插入/删除位置之后的所有元素</strong>。</p>
+<p>3.相对于ArrayList，<strong>LinkedList的随机访问集合元素时性能较差，因为需要在双向链表中找到index的位置再返回</strong>；但在进行插入、删除操作时比前者要快，因为LinkedList不像ArrayList，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组中。</p>
+<p>4.LinkedList相较于ArrayList需要更多的内存，因为ArrayList的每个索引的位置都是实际的数据，而LinkedList中的每个节点存储的实际上是数据和前后节点的位置</p>
+<h3 id="两者的使用场景"><a href="#两者的使用场景" class="headerlink" title="两者的使用场景"></a>两者的使用场景</h3><p>当应用队数据有较多的随机访问时，ArrayList要优于LinkedList</p>
+<p>如果应用有更多的插入或者删除操作，随机访问较少，LinkedList要优于ArrayList。</p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+        <tag>数据结构</tag>
+        <tag>重点</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从输入URL到网页呈现的过程</title>
     <url>/2021/03/15/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E7%BD%91%E9%A1%B5%E5%91%88%E7%8E%B0%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<ul>
