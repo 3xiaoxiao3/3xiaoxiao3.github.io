@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://static001.geekbang.org/resource/image/6d/bf/6d1313f51b9dfd7ab454b2cef1cb37bf.jpg">
 <meta property="og:image" content="https://static001.geekbang.org/resource/image/a7/bf/a795461effcce686a43f48e094c9adbf.jpg">
 <meta property="article:published_time" content="2021-03-14T02:15:50.000Z">
-<meta property="article:modified_time" content="2021-03-15T01:11:13.480Z">
+<meta property="article:modified_time" content="2021-03-17T01:09:32.569Z">
 <meta property="article:author" content="小小">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
@@ -403,7 +403,7 @@
 <li>当主机A完成数据传输后，将控制位FIN置为1，提出停止TCP连接的请求</li>
 <li>主机B收到FIN后对其作出响应，确认这一方向的TCP连接将关闭，将ACK置为1</li>
 <li>由主机B端再提出反方向的关闭请求，将FIN置为1</li>
-<li>主机A队主机B的请求进行确认，将ACK置为1，双方向的关闭结束</li>
+<li>主机A对主机B的请求进行确认，将ACK置为1，双方向的关闭结束</li>
 </ol>
 <h4 id="TCP的三次握手目的是什么？为什么不用两次和四次？"><a href="#TCP的三次握手目的是什么？为什么不用两次和四次？" class="headerlink" title="TCP的三次握手目的是什么？为什么不用两次和四次？"></a>TCP的三次握手目的是什么？为什么不用两次和四次？</h4><p><strong>TCP 三次握手的主要目的是防止失效的连接请求报文被服务端接受</strong></p>
 <p>  如果只有两次握手，假设当客户端发送第一次连接请求由于网络拥塞的原因，迟迟未到服务端，客户端没接收到确认报文，认为服务端没有收到，于是重新发送请求报文并与服务端建立连接，等这次连接断开了，之前滞留的那个请求报文又到达了服务端，就会让服务端与客户端再次连接成功，这时服务端就会一直等待客户端发送请求，造成了资源的浪费。</p>
@@ -529,7 +529,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
