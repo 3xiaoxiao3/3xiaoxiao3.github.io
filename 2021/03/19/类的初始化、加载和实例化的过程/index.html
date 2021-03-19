@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="1.锁的 7 大分类 偏向锁&#x2F;轻量级锁&#x2F;重量级锁 可重入锁&#x2F;非可重入锁 共享锁&#x2F;独占锁 公平锁&#x2F;非公平锁 悲观锁&#x2F;乐观锁 自旋锁&#x2F;非自旋锁 可中断锁&#x2F;不可中断锁">
+<meta name="description" content="一、一个类及对象初始化的过程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java中的锁">
-<meta property="og:url" content="http://example.com/2021/03/17/Java%E4%B8%AD%E7%9A%84%E9%94%81/index.html">
+<meta property="og:title" content="类的初始化、加载和实例化的过程">
+<meta property="og:url" content="http://example.com/2021/03/19/%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.锁的 7 大分类 偏向锁&#x2F;轻量级锁&#x2F;重量级锁 可重入锁&#x2F;非可重入锁 共享锁&#x2F;独占锁 公平锁&#x2F;非公平锁 悲观锁&#x2F;乐观锁 自旋锁&#x2F;非自旋锁 可中断锁&#x2F;不可中断锁">
+<meta property="og:description" content="一、一个类及对象初始化的过程">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-17T02:24:16.000Z">
-<meta property="article:modified_time" content="2021-03-17T10:13:48.989Z">
+<meta property="article:published_time" content="2021-03-19T03:27:01.000Z">
+<meta property="article:modified_time" content="2021-03-19T08:33:47.337Z">
 <meta property="article:author" content="小小">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2021/03/17/Java中的锁/"/>
+  <link rel="canonical" href="http://example.com/2021/03/19/类的初始化、加载和实例化的过程/"/>
 
 
 
 
 
-  <title>Java中的锁 | Hexo</title>
+  <title>类的初始化、加载和实例化的过程 | Hexo</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/17/Java%E4%B8%AD%E7%9A%84%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/19/%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java中的锁</h1>
+          <h1 class="post-title" itemprop="name headline">类的初始化、加载和实例化的过程</h1>
         
 
         <div class="post-meta">
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-17T10:24:16+08:00">
-                2021-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-19T11:27:01+08:00">
+                2021-03-19
               </time>
             
 
@@ -356,41 +356,92 @@
       
 
       
-        <h3 id="1-锁的-7-大分类"><a href="#1-锁的-7-大分类" class="headerlink" title="1.锁的 7 大分类"></a>1.锁的 7 大分类</h3><ul>
-<li>偏向锁/轻量级锁/重量级锁</li>
-<li>可重入锁/非可重入锁</li>
-<li>共享锁/独占锁</li>
-<li>公平锁/非公平锁</li>
-<li>悲观锁/乐观锁</li>
-<li>自旋锁/非自旋锁</li>
-<li>可中断锁/不可中断锁</li>
-</ul>
-<span id="more"></span>
+        <h3 id="一、一个类及对象初始化的过程"><a href="#一、一个类及对象初始化的过程" class="headerlink" title="一、一个类及对象初始化的过程"></a>一、一个类及对象初始化的过程</h3><span id="more"></span>
 
-<h3 id="2-偏向锁-轻量级锁-重量级锁"><a href="#2-偏向锁-轻量级锁-重量级锁" class="headerlink" title="2.偏向锁/轻量级锁/重量级锁"></a>2.偏向锁/轻量级锁/重量级锁</h3><ul>
-<li><p>偏向锁<br>如果自始至终，对于这把锁都不存在竞争，那么其实就没必要上锁，只需要打个标记就行了，这就是偏向锁的思想。一个对象被初始化后，还没有任何线程来获取它的锁时，那么它就是可偏向的，当有第一个线程来访问它并尝试获取锁的时候，它就将这个线程记录下来，以后如果尝试获取锁的线程正是偏向锁的拥有者，就可以直接获得锁，开销很小，性能最好。</p>
-</li>
-<li><p>轻量级锁<br>JVM 开发者发现在很多情况下，synchronized 中的代码是被多个线程交替执行的，而不是同时执行的，也就是说并不存在实际的竞争，或者是只有短时间的锁竞争，用 CAS 就可以解决，这种情况下，用完全互斥的重量级锁是没必要的。轻量级锁是指当锁原来是偏向锁的时候，被另一个线程访问，说明存在竞争，那么偏向锁就会升级为轻量级锁，线程会通过自旋的形式尝试获取锁，而不会陷入阻塞。</p>
-</li>
-<li><p>重量级锁<br>重量级锁是互斥锁，它是利用操作系统的同步机制实现的，所以开销相对比较大。当多个线程直接有实际竞争，且锁竞争时间长的时候，轻量级锁不能满足需求，锁就会膨胀为重量级锁。重量级锁会让其他申请却拿不到锁的线程进入阻塞状态。</p>
-</li>
+<h4 id="什么时候需要初始化一个类"><a href="#什么时候需要初始化一个类" class="headerlink" title="什么时候需要初始化一个类"></a>什么时候需要初始化一个类</h4><p>首次创建某个对象时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dog dog = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
+
+<p>或是首次访问某个类的静态方法或者是静态字段的时候</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dog.staticFields;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获得类的资源"><a href="#获得类的资源" class="headerlink" title="获得类的资源"></a>获得类的资源</h4><p>然后JVM就会载入Dog.class，生成一个class对象。这个时候如果有静态的方法或者变量，静态初始化的动作都会被执行。<strong>静态初始化在程序运行过程中只会在Class对象首次加载的时候运行一次，这些资源都会放在JVM的方法区</strong>。</p>
+<p>方法区又叫静态区，和堆一样，被所有的线程共享。</p>
+<p>方法区包含的都是在整个程序中永远唯一的元素，包含所有的class和static变量</p>
+<h4 id="初始化对象Dog-dog-new-Dog"><a href="#初始化对象Dog-dog-new-Dog" class="headerlink" title="初始化对象Dog dog = new Dog()"></a>初始化对象Dog dog = new Dog()</h4><ul>
+<li>第一次创建Dog对象先执行上面的一二步</li>
+<li>在堆上为Dog对象分配足够的存储空间，所有属性和方法都被设置成默认值(数字为0，字符为null，布尔为false，而所有引用被设置成null)</li>
+<li>执行构造函数时检查是否有父类，如果有父类就会先调用父类的构造函数，这里假设Dog没有父类，执行默认值字段的赋值即方法的初始化动作</li>
+<li>执行构造函数</li>
 </ul>
-<p>锁升级的路径：无锁→偏向锁→轻量级锁→重量级锁。</p>
-<h3 id="3-可重入锁-非可重入锁"><a href="#3-可重入锁-非可重入锁" class="headerlink" title="3.可重入锁/非可重入锁"></a>3.可重入锁/非可重入锁</h3><p>可重入锁指的是线程当前已经持有这把锁了，能在不释放这把锁的情况下，再次获取这把锁。不可重入锁指的是虽然线程当前持有了这把锁，但是如果想再次获取这把锁，也必须要先释放锁后才能再次尝试获取。</p>
-<h3 id="4-共享锁-独占锁"><a href="#4-共享锁-独占锁" class="headerlink" title="4.共享锁/独占锁"></a>4.共享锁/独占锁</h3><p>共享锁指的是我们同一把锁可以被多个线程同时获得，而独占锁指的就是，这把锁只能同时被一个线程获得。读写锁中的读锁，是共享锁，而写锁是独占锁。读锁可以被同时读，可以同时被多个线程持有，而写锁最多只能同时被一个线程持有。</p>
-<h3 id="5-公平锁-非公平锁"><a href="#5-公平锁-非公平锁" class="headerlink" title="5.公平锁/非公平锁"></a>5.公平锁/非公平锁</h3><p>公平锁的公平的含义在于如果线程现在拿不到这把锁，那么线程就都会进入等待，开始排队，在等待队列里等待时间长的线程会优先拿到这把锁，。而非公平锁会在一定情况下忽略掉已经在排队的线程，发生插队现象</p>
-<h3 id="6-悲观锁-乐观锁"><a href="#6-悲观锁-乐观锁" class="headerlink" title="6.悲观锁/乐观锁"></a>6.悲观锁/乐观锁</h3><p>悲观锁会悲观的认为多个线程操作数据一定会产生问题，因此在获取资源之前必须先拿到锁。</p>
-<p>而乐观锁则恰恰相反，认为同一个数据的并发操作是不会发生修改的，因此在更新数据的时候会采用尝试更新，不断更新数据，乐观的认为不加锁的并发操作是没有问题的。</p>
-<h4 id="乐观锁的实现："><a href="#乐观锁的实现：" class="headerlink" title="乐观锁的实现："></a>乐观锁的实现：</h4><ol>
-<li><p>CAS：当多个线程尝试使用CAS同时更新一个变量时，只有其中一个线程能更新变量的值，而其他线程都会失败，失败的线程并不会挂起，而是被告知这次竞争中失败，并且可以再次尝试，CAS是一种非阻塞式的同步方式。</p>
-<p>CAS操作包含三个操作数——内存位置、预期原值和新值。如果内存位置的值与预期原值相匹配，那么处理器会自动将该位置更新为新值。否则不做任何操作。</p>
-<p><strong>乐观锁是一种思想，而CAS是这种思想的一种实现方式</strong></p>
+<hr>
+<h4 id="有父类情况下的初始化"><a href="#有父类情况下的初始化" class="headerlink" title="有父类情况下的初始化"></a>有父类情况下的初始化</h4><p>假设Dog extends Animal</p>
+<ol>
+<li><p>执行第一步，找出Dog.class文件，接着在加载过程中会发现他有一个基类，于是先执行Animal类的第一二步，加载其静态方法和变量，加载结束之后再加载子类Dog的静态方法和变量。</p>
+<p>如果Animal类还有父类就继续类推，最终的基类叫做根基类</p>
+<p><strong>因为子类的static初始化可能会依赖父类的静态资源，所以要先加载父类的静态资源。</strong></p>
 </li>
-<li><p>版本号控制：一般在数据表中加上一个数据版本号version字段，表示数据被修改的次数。当数据被修改时，version值会+1。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值与当前数据库中的version值相等才会更新数据，否则重试更新操作，直到更新成功</p>
+<li><p>接着new Dog对象，先为Dog对象分配存储空间-&gt;到Dog的构造函数-&gt;创建默认的属性。这里其构造函数中有一个隐含的super()，即父类构造函数，所以这时候会跳转到父类Animal的构造函数。</p>
+<p>Java会帮我们完成构造函数的补充，Dog实际隐式的构造函数如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Dog()&#123;</span><br><span class="line">	<span class="comment">//创建默认的属性和方法</span></span><br><span class="line">	<span class="comment">//调用父类的构造函数super()(可显式写出)</span></span><br><span class="line">	<span class="comment">//对默认属性和方法分别进行赋值和初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>父类Animal执行构造函数之前也是先分配存储空间-&gt;到其的构造函数-&gt;创建默认的属性，接着发现自己已经没有父类了，这时就给它的默认的属性赋值和方法的初始化</p>
+</li>
+<li><p>接着执行构造函数余下的部分，结束后跳转到子类Dog的构造函数。</p>
+</li>
+<li><p>子类Dog对默认属性和方法分别进行赋值和初始化，接着完成构造函数接下来的部分</p>
 </li>
 </ol>
-<h3 id="7-自旋锁和非自旋锁"><a href="#7-自旋锁和非自旋锁" class="headerlink" title="7.自旋锁和非自旋锁"></a>7.自旋锁和非自旋锁</h3><p>自旋锁的理念是如果线程现在拿不到锁，并不直接陷入阻塞或者释放CPU资源，而是开始利用循环，不停尝试获取锁，这个循环过程被称为“自旋”。相反，非自旋锁就是没有自旋的过程，如果拿不到锁就直接放弃或者进行其他的逻辑处理。</p>
-<h3 id="8-可中断锁-不可中断锁"><a href="#8-可中断锁-不可中断锁" class="headerlink" title="8.可中断锁/不可中断锁"></a>8.可中断锁/不可中断锁</h3><p>在Java中，synchronized关键字修饰的锁代表的是不可中断锁，一旦线程申请了锁，就只能等待拿到锁之后才能进行其他的逻辑处理，而ReentrantLock就是一种可中断锁，在获取锁的过程中突然不想获取了也可以在中断之后去做其他的事情，并不需要一直等到获取到锁才离开。</p>
+<h5 id="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"><a href="#为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？" class="headerlink" title="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"></a>为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？</h5><p>因为子类的非静态变量和方法的初始化有可能使用到其父类的属性或方法，所以子类构造默认的属性的方法之后不应该进行赋值，而要跳转到父类的构造方法完成父类对象的构造之后，才来队自己的属性和方法进行初始化。</p>
+<p>因此子类的构造函数显示调用父类构造函数super()时要强制写在第一行的原因，程序需要跳转到父类构造函数完成父类对象的构造之后才能执行子类构造函数的余下部分。</p>
+<h5 id="为什么对属性和方法初始化之后再执行构造函数的其他部分？"><a href="#为什么对属性和方法初始化之后再执行构造函数的其他部分？" class="headerlink" title="为什么对属性和方法初始化之后再执行构造函数的其他部分？"></a>为什么对属性和方法初始化之后再执行构造函数的其他部分？</h5><p>因为构造函数中的显式部分有可能使用到对象的属性和方法。</p>
+<h5 id="初始化块的执行顺序"><a href="#初始化块的执行顺序" class="headerlink" title="初始化块的执行顺序"></a>初始化块的执行顺序</h5><p>首先static初始化块是在构造函数之前执行的，而且只执行一次，即类首次加载时。</p>
+<p>初始化是在类加载的时候完成的，而构造方法是生成对象的，是在类加载之后完成的，所以先执行初始化块</p>
+<p>初始化块分为静态和非静态，静态初始化块是执行一次，无论new多少次，它只会执行一次。</p>
+<p>而非静态初始化块则不是这样，每次new都会执行，而执行顺序是先静态后非静态。</p>
+<p><strong>无论静态或者是非静态，它们的执行顺序都在构造方法之前执行</strong></p>
+<p>在你在父类方法的情况下：<strong>在执行完非静态块后立即执行其构造函数然后执行子类的非静态代码块然后执行子类的构造方法。</strong></p>
+<h3 id="二、类实例化"><a href="#二、类实例化" class="headerlink" title="二、类实例化"></a>二、类实例化</h3><h4 id="类实例化的时机"><a href="#类实例化的时机" class="headerlink" title="类实例化的时机"></a>类实例化的时机</h4><p>一般是使用new和反射的时候</p>
+<h4 id="类实例化的过程"><a href="#类实例化的过程" class="headerlink" title="类实例化的过程"></a>类实例化的过程</h4><ol>
+<li><p>前提：.class文件已被加载完毕(经过加载、解析和初始化)</p>
+</li>
+<li><p>系统赋初值：在堆内存中为xxx类及其父类中的非静态成员变量开辟空间，并赋系统默认初值(0，null，false)，因为成员变量有初值，函数才能使用。</p>
+<p>即使子类覆盖了父类成员变量，仍会给父类所有成员变量分配空间，此时子类中多了一个属性，分态性，空间储存，分别存储父类和子类的成员变量。</p>
+</li>
+<li><p>父类成员变量的显式初始化和构造代码块的初始化</p>
+<p>两者的执行顺序就是代码排列顺序(和静态变量显示初始化和静态构造代码块初始化一样)，但和前面静态一样，当构造代码块在前二成员变量声明在后时，构造代码块中只能赋值，不能访问。另外实际上两者都会被自动装入父类构造函数的最前面</p>
+</li>
+<li><p>父类构造函数执行</p>
+<p>Java强制要求Object对象之外的所有类的构造函数的第一条语句必须是超类构造函数的调用语句，以保证所创建实例的完整性。</p>
+</li>
+<li><p>成员变量的显式初始化和子类构造代码块的初始化</p>
+</li>
+<li><p>构造函数初始化</p>
+<p>每一个Java中的对象都至少会有一个构造函数，如果没有显式定义构造函数，那么JVM会自动生成一个默认无参的构造函数。在编译生成的字节码中，这些构造函数会被命名为<init>()方法。参数列表与Java语言书写的构造函数的参数列表相同。</p>
+</li>
+</ol>
+<h4 id="类的加载机制和实例化的区别"><a href="#类的加载机制和实例化的区别" class="headerlink" title="类的加载机制和实例化的区别"></a>类的加载机制和实例化的区别</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>类的加载机制</th>
+<th>类的实例化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是什么</td>
+<td>把类从.class文件加载到虚拟机，为实例化做准备</td>
+<td>创建一个类的实例(对象)的过程</td>
+</tr>
+<tr>
+<td>实例化的对象</td>
+<td>只有类变量按照程序代码被赋值（<clinit>()方法的执行）</td>
+<td>非静态变量的初始化，以及构造方法的执行（&lt;init()方法的执行）</td>
+</tr>
+<tr>
+<td>执行次数</td>
+<td>一个类只会执行1次</td>
+<td>一个类可执行多次</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -421,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/17/HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%88%E8%AF%B7%E6%B1%82%E8%A1%8C%E3%80%81%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93%EF%BC%89/" rel="next" title="HTTP请求报文">
-                <i class="fa fa-chevron-left"></i> HTTP请求报文
+              <a href="/2021/03/17/Java%E4%B8%AD%E7%9A%84%E9%94%81/" rel="next" title="Java中的锁">
+                <i class="fa fa-chevron-left"></i> Java中的锁
               </a>
             
           </div>
@@ -430,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/03/19/%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/" rel="prev" title="类的初始化、加载和实例化的过程">
-                类的初始化、加载和实例化的过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%94%81%E7%9A%84-7-%E5%A4%A7%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">1.锁的 7 大分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%81%8F%E5%90%91%E9%94%81-%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81-%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-number">2.</span> <span class="nav-text">2.偏向锁&#x2F;轻量级锁&#x2F;重量级锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81-%E9%9D%9E%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="nav-number">3.</span> <span class="nav-text">3.可重入锁&#x2F;非可重入锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%85%B1%E4%BA%AB%E9%94%81-%E7%8B%AC%E5%8D%A0%E9%94%81"><span class="nav-number">4.</span> <span class="nav-text">4.共享锁&#x2F;独占锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%85%AC%E5%B9%B3%E9%94%81-%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-number">5.</span> <span class="nav-text">5.公平锁&#x2F;非公平锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%82%B2%E8%A7%82%E9%94%81-%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-number">6.</span> <span class="nav-text">6.悲观锁&#x2F;乐观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">乐观锁的实现：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%87%AA%E6%97%8B%E9%94%81%E5%92%8C%E9%9D%9E%E8%87%AA%E6%97%8B%E9%94%81"><span class="nav-number">7.</span> <span class="nav-text">7.自旋锁和非自旋锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%8F%AF%E4%B8%AD%E6%96%AD%E9%94%81-%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E9%94%81"><span class="nav-number">8.</span> <span class="nav-text">8.可中断锁&#x2F;不可中断锁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%80%E4%B8%AA%E7%B1%BB%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">一、一个类及对象初始化的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">什么时候需要初始化一个类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E7%B1%BB%E7%9A%84%E8%B5%84%E6%BA%90"><span class="nav-number">1.2.</span> <span class="nav-text">获得类的资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%B9%E8%B1%A1Dog-dog-new-Dog"><span class="nav-number">1.3.</span> <span class="nav-text">初始化对象Dog dog &#x3D; new Dog()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E7%88%B6%E7%B1%BB%E6%83%85%E5%86%B5%E4%B8%8B%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">有父类情况下的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%89%A7%E8%A1%8C%E7%88%B6%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%90%8E%E6%89%8D%E8%83%BD%E7%BB%A7%E7%BB%AD%E5%AD%90%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7%E5%8F%8A%E6%96%B9%E6%B3%95%E8%B5%8B%E5%80%BC%EF%BC%9F"><span class="nav-number">1.4.1.</span> <span class="nav-text">为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AF%B9%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B9%8B%E5%90%8E%E5%86%8D%E6%89%A7%E8%A1%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B6%E4%BB%96%E9%83%A8%E5%88%86%EF%BC%9F"><span class="nav-number">1.4.2.</span> <span class="nav-text">为什么对属性和方法初始化之后再执行构造函数的其他部分？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">初始化块的执行顺序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">二、类实例化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">类实例化的时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">类实例化的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.</span> <span class="nav-text">类的加载机制和实例化的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
