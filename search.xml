@@ -12,6 +12,74 @@
       </tags>
   </entry>
   <entry>
+    <title>Mysql索引</title>
+    <url>/2021/03/25/Mysql%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<h4 id="索引的目的是什么"><a href="#索引的目的是什么" class="headerlink" title="索引的目的是什么"></a>索引的目的是什么</h4><ul>
+<li>快速访问表中的特定信息，提高检索速度</li>
+<li>创建唯一性索引，保证数据库表中每一行数据的唯一性</li>
+<li>加速表与表之间的连接</li>
+<li>使用分组和排序字句进行数据检索时，可以显著减少查询分组和排序的时间</li>
+</ul>
+<h4 id="索引队数据库系统的负面影响"><a href="#索引队数据库系统的负面影响" class="headerlink" title="索引队数据库系统的负面影响"></a>索引队数据库系统的负面影响</h4><ul>
+<li>创建和维护索引需要耗费时间，这个时间随着数据量的增加而增加</li>
+<li>索引需要占用物理空间，不光是表需要占用数据空间，每个索引也都需要占用物理空间。</li>
+<li>当对表进行增删改的时候索引也需要动态维护，这就降低了数据的维护速度</li>
+</ul>
+<h4 id="为数据表简历索引的原则"><a href="#为数据表简历索引的原则" class="headerlink" title="为数据表简历索引的原则"></a>为数据表简历索引的原则</h4><ul>
+<li>在最频繁使用的、用以缩小查询范围的字段上建立索引</li>
+<li>在频繁使用的、需要排序的字段上建立索引</li>
+</ul>
+<h4 id="什么情况下不宜建立索引"><a href="#什么情况下不宜建立索引" class="headerlink" title="什么情况下不宜建立索引"></a>什么情况下不宜建立索引</h4><ul>
+<li>查询中很少涉及的列或者是重复值比较多的列</li>
+<li>对于一些特殊的数据类型，比如text等</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql事务的隔离级别</title>
+    <url>/2021/03/25/Mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
+    <content><![CDATA[<p>Mysql中InnoDB支持四种事务隔离级别</p>
+<ol>
+<li>read uncommited：读到未提交数据</li>
+<li>read committed：不可重复读</li>
+<li>repeatable read：可重读、读提交</li>
+<li>serializable：串行事务</li>
+</ol>
+<span id="more"></span>
+
+<p>mysql默认设置的隔离级别是repeatable read(可重复读)</p>
+<h4 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h4><p>MYSQL事务隔离是依靠锁来实现的，而未读提交是不加锁的，所以性能是最好的。</p>
+<p>任何事务队数据的修改都会第一时间暴露给其他的事务，即使事务还没有提交。</p>
+<p>读未提交，其实就是可以读到其他事务未提交的数据，但没有保证你读到的数据最终一定是提交之后的数据，如果中间发生回滚，那就回出现脏数据的问题。</p>
+<h4 id="可重读"><a href="#可重读" class="headerlink" title="可重读"></a>可重读</h4><p>可重读指的是在一个事务内，最开始读到了数据和事务结束前的任意时刻读到的同一批数据都是一致的。也就是事务不会读到其他事务对已有数据的修改，即使其他事务已经提交。但是，对于其他事务新插入的数据时可以读到的，这也就引发了幻读的问题。</p>
+<h4 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h4><p>对比可重复读，不可重复读指的是在同一事务内，不同的时刻读到的同一数据可能是不一样的，可能会受到其他事务的影响，比如其他事务改了这批数据并提交了。也就一个事务只能读到其他事务已经提交过的数据，也就是其他事务调用了commit命令之后的数据。</p>
+<h4 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h4><p>串行化是四种事务隔离级别中效果最好的，它将事务变为顺序执行，与其他的三个隔离级别相比，它就相当于单线程 ，后一个事务必须等待前一个事务结束</p>
+]]></content>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北京风行面试记录</title>
+    <url>/2021/03/25/%E5%8C%97%E4%BA%AC%E9%A3%8E%E8%A1%8C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Activity、Service和Fragment的生命周期</title>
+    <url>/2021/03/25/Activity%E3%80%81Service%E5%92%8CFragment%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<h3 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h3><p>Activity实例是由系统自动创建，并在不同的状态期间回调相应的方法。一个最简单的完整的Activity生命周期会按照如下顺序回调：onCreate -&gt; onStart -&gt; onResume -&gt; onPause -&gt; onStop -&gt; onDestroy。</p>
+<span id="more"></span>
+
+<p>如下图所示：<img src="http://ailianblog.oss-cn-shenzhen.aliyuncs.com/activity/blog_activity_01.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Activity的四种启动模式</title>
     <url>/2021/03/25/Activity%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>Activity的启动模式可以在AndroidManifest.xml中，通过android:launchMode或者在Intent的Flag来设置实现。</p>
@@ -650,9 +718,14 @@
 <p>回溯算法解决，时间复杂度：O*(<em>n</em>×*n!)，其中 n为序列的长度</p>
 </li>
 <li><p>数据库事物的四个基本特性是什么？</p>
+<ul>
+<li>原子性：即不可分割性，事务要么全部被执行，要么就全部不执行。</li>
+<li>一致性：事务的执行使得数据库以一种正确的状态转换成另一种正确状态。</li>
+<li>隔离性：在事务提交之前，不允许把该事务对数据的任何改变提供给任何其他事务。</li>
+<li>持久性：事务正确提交之后，其结果将永久保存在数据库中，即使事务提交后有了其他故障，事务的处理结果也会得到保存。</li>
+</ul>
 </li>
 </ol>
-<p>原子性、一致性、隔离性、持久性</p>
 ]]></content>
       <tags>
         <tag>面试记录</tag>
