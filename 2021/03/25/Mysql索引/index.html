@@ -87,7 +87,7 @@
 <meta property="og:description" content="索引的目的是什么 快速访问表中的特定信息，提高检索速度 创建唯一性索引，保证数据库表中每一行数据的唯一性 加速表与表之间的连接 使用分组和排序字句进行数据检索时，可以显著减少查询分组和排序的时间  索引队数据库系统的负面影响 创建和维护索引需要耗费时间，这个时间随着数据量的增加而增加 索引需要占用物理空间，不光是表需要占用数据空间，每个索引也都需要占用物理空间。 当对表进行增删改的时候索引也需要动">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-25T14:44:48.000Z">
-<meta property="article:modified_time" content="2021-03-25T14:50:26.481Z">
+<meta property="article:modified_time" content="2021-03-26T02:14:51.225Z">
 <meta property="article:author" content="小小">
 <meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary">
@@ -375,6 +375,8 @@
 <li>查询中很少涉及的列或者是重复值比较多的列</li>
 <li>对于一些特殊的数据类型，比如text等</li>
 </ul>
+<h4 id="数据库索引中为什么使用B-树而不是其他的树形结构"><a href="#数据库索引中为什么使用B-树而不是其他的树形结构" class="headerlink" title="数据库索引中为什么使用B+树而不是其他的树形结构"></a>数据库索引中为什么使用B+树而不是其他的树形结构</h4><p>因为B树不管是叶子节点还是非叶子节点，都会保存数据，导致在非叶子节点中能保存的指针数量变少。</p>
+<p>指针少的情况下要保存大量的数据，只能增加树的高度，导致IO操作变多，查询性能变低。</p>
 
       
     </div>
@@ -414,6 +416,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/26/Java%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7/" rel="prev" title="Java的四大基本特性">
+                Java的四大基本特性 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -490,7 +496,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">索引的目的是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E9%98%9F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%B4%9F%E9%9D%A2%E5%BD%B1%E5%93%8D"><span class="nav-number">2.</span> <span class="nav-text">索引队数据库系统的负面影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%AE%80%E5%8E%86%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">为数据表简历索引的原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%B8%8D%E5%AE%9C%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="nav-number">4.</span> <span class="nav-text">什么情况下不宜建立索引</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">索引的目的是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E9%98%9F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%B4%9F%E9%9D%A2%E5%BD%B1%E5%93%8D"><span class="nav-number">2.</span> <span class="nav-text">索引队数据库系统的负面影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%AE%80%E5%8E%86%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">为数据表简历索引的原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%B8%8D%E5%AE%9C%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95"><span class="nav-number">4.</span> <span class="nav-text">什么情况下不宜建立索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8B-%E6%A0%91%E8%80%8C%E4%B8%8D%E6%98%AF%E5%85%B6%E4%BB%96%E7%9A%84%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">数据库索引中为什么使用B+树而不是其他的树形结构</span></a></li></ol></div>
             
 
           </div>
