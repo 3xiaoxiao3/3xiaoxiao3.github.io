@@ -12,128 +12,108 @@
       </tags>
   </entry>
   <entry>
-    <title>Java的反射机制</title>
-    <url>/2021/03/26/Java%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h4 id="Java反射机制的作用"><a href="#Java反射机制的作用" class="headerlink" title="Java反射机制的作用"></a>Java反射机制的作用</h4><ol>
-<li>在运行时判断任意一个对象所属的类</li>
-<li>在运行时判断任意一个类所具有的成员变量和方法</li>
-<li>在运行时任意调用一个对象的方法</li>
-<li>在运行时构造任意一个类的对象</li>
-</ol>
-<h4 id="什么是反射机制"><a href="#什么是反射机制" class="headerlink" title="什么是反射机制"></a>什么是反射机制</h4><p>简单来说，反射机制就是程序在运行时能获取到自身的信息。在Java中，只要给定类的名字，那么就能通过反射机制来获得类的所有信息</p>
-<h4 id="反射机制的优缺点"><a href="#反射机制的优缺点" class="headerlink" title="反射机制的优缺点"></a>反射机制的优缺点</h4><h5 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h5><ul>
-<li>静态编译：在编译时即确定类型，绑定对象，即通过</li>
-<li>动态编译：运行时确定类型，绑定对象。动态编译最大限度的发挥了Java的灵活性，体现了多态的应用，有利于降低类之间的耦合性</li>
-</ul>
-<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>对性能有一定影响，使用反射基本上是一种解释操作，我们可以告诉JVM，我们希望做什么并且它满足我们的要求。这类操作总是慢于直接执行相同的操作。</p>
-]]></content>
-      <tags>
-        <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java的四大基本特性</title>
-    <url>/2021/03/26/Java%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<p>Java的四个基本特性：抽象、封装、继承、多态</p>
-<span id="more"></span>
+    <title>TCP和UDP</title>
+    <url>/2021/03/14/TCP%E5%92%8CUDP/</url>
+    <content><![CDATA[<h4 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h4><span id="more"></span>
 
-<h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><p>指将一类对象的共同特征总结出来构造类的过程，主要包括数据抽象和行为抽象两个方面，分别对应于类的属性和方法，抽象只关注对象有哪些属性和行为，并不关注这些行为的细节是什么。</p>
-<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装就是将类的某些属性隐藏起来，然后通过接口对外开放，但是在外部不能直接进行查找属性。</p>
-<p>封装有以下几个优点：</p>
-<ol>
-<li>便于使用者正确、方便的使用系统，防止使用者错误修改系统属性</li>
-<li>有助于建立各个系统间的松耦合关系</li>
-<li>提高了软件的可重用性</li>
-<li>降低了大型系统的风险，即使整个系统不成功，个别独立的子系统可能还有价值</li>
+<ul>
+<li>TCP是面向连接的，UDP是面向无连接的。</li>
+<li>UDP程序结构较为简单。</li>
+<li>TCP是面向字节流的，UDP是基于数据报的。</li>
+<li>TCP保证数据正确性，UDP可能丢包。</li>
+<li>TCP保证数据顺序，UDP不保证</li>
+</ul>
+<h4 id="什么是UDP"><a href="#什么是UDP" class="headerlink" title="什么是UDP"></a>什么是UDP</h4><p>UDP的包头：</p>
+<p><img src="https://static001.geekbang.org/resource/image/6d/bf/6d1313f51b9dfd7ab454b2cef1cb37bf.jpg" alt="UDP 包头"></p>
+<ul>
+<li>两个十六位的端口号，分别为源端口和目标端口。</li>
+<li>整个数据报文的长度。</li>
+<li>整个数据报文的校验和，该字段用于发现头部信息和数据中的错误。</li>
+</ul>
+<h5 id="UDP的特点"><a href="#UDP的特点" class="headerlink" title="UDP的特点"></a>UDP的特点</h5><ul>
+<li>沟通简单，不需要大量的数据结构、处理逻辑和包头字段</li>
+<li>不会建立连接，但是会监听这个地方，谁都可以传给它数据，它也可以传给任何人数据，甚至可以同时传给多个人。</li>
+<li>不会根据网络的情况进行拥塞控制，无论是否丢包都会一直发送</li>
+</ul>
+<p>因此UDP在传输报文时是很高效的</p>
+<h4 id="什么是TCP"><a href="#什么是TCP" class="headerlink" title="什么是TCP"></a>什么是TCP</h4><p>TCP的包头格式：</p>
+<p><img src="https://static001.geekbang.org/resource/image/a7/bf/a795461effcce686a43f48e094c9adbf.jpg" alt="TCP 包头"></p>
+<ul>
+<li>首先是源端口和目标端口</li>
+<li>接下来是包的序号，主要为了解决乱序问题</li>
+<li>确认序号，发出去的包应该有确认，这样能知道对方是否收到，如果没收到就应该重新发送，解决丢包的问题</li>
+<li>状态位。SYN是发起一个链接，ACK是回复，RST是重新连接，FIN是结束连接。因为TCP是面向连接的，因此需要双方维护连接的状态，这些状态位的包会引起双方的状态变更。</li>
+<li>窗口大小，TCP要做流量控制，需要通信双方各声明一个窗口，标记自己当前的处理能力</li>
+</ul>
+<h5 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h5><ol>
+<li><p>主机A通过向主机B发送一个含有同步序列号标志位的数据段（SYN）给主机B，向主机B请求建立连接，通过这个数据段，主机A告诉主机B两件事：我想要和你通信；你可以用哪个序列号作为起始数据段来回应我。</p>
+</li>
+<li><p>主机B收到主机A的请求后，用一个带有确认应答(ACK)和同步序列号(SYN)标志位的数据段响应主机A，也告诉主机A两件事：我已经收到你的请求了，你可以传输数据了；你要用哪个序列号作为起始数据段来回应我。</p>
+</li>
+<li><p>主机A收到这个数据段后，再发送一个确认应答，确认已收到主机B的数据段</p>
+<p>这样三次握手就完成了，主机AB就可以传输数据了</p>
+</li>
 </ol>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>子类继承父类的非private属性和方法</p>
-<p>子类除了拥有从父类继承过来的属性和方法外，子类还可以有自己的属性和方法</p>
-<p>java中只支持单一继承，也就是一个子类只能有一个父类，但是一个父类可以有多个子类</p>
-<h5 id="继承的作用"><a href="#继承的作用" class="headerlink" title="继承的作用"></a>继承的作用</h5><p>提高吗的重用性。一个源文件中可以包含多个类，但是只能有一个类带public，而且带public访问修饰符的类的类名要和源文件的文件名相同，main方法也要写在带public的类中。</p>
-<p>当创建子类对象时，一定会先执行父类的构造方法创建父类对象，然后在调用子类的构造方法创建子类的对象。而且在创建子类的对象时无论是调用有参数还是无参数的构造方法，JVM都会默认代用父类的五参数的构造方法创建父类的对象。</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>多态就是指同一事物在不同情况下的多种表现形式</p>
-<p>多态的表现形式有：方法重写、方法重载、接口和接口的继承、类和类的继承</p>
-<h5 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h5><p>在同一个类中，有多个方法名相同，单参数列表不同的方法，这就是方法的重载，参数列表的不同包括：参数个数、类型、顺序的不同，普通方法和构造方法都可重载，方法重载会根据传递的参数来决定调用哪个方法，返回值不同，其他都相同的情况下是构不成方法的重载的</p>
-<h5 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h5><p>发生在子类继承父类的关系中，父类的方法被子类继承，方法名、返回值类型、参数完全一样，但是方法体不一样，那么说明父类中的该方法被子类重写了。</p>
-<p>目的：当父类中的方法无法满足子类的需求时，那么子类可以对父类的方法进行扩展</p>
-<p><strong>方法重写子类的访问修饰符范围不能缩小</strong></p>
-]]></content>
-      <tags>
-        <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mysql索引</title>
-    <url>/2021/03/25/Mysql%E7%B4%A2%E5%BC%95/</url>
-    <content><![CDATA[<h4 id="索引的目的是什么"><a href="#索引的目的是什么" class="headerlink" title="索引的目的是什么"></a>索引的目的是什么</h4><ul>
-<li>快速访问表中的特定信息，提高检索速度</li>
-<li>创建唯一性索引，保证数据库表中每一行数据的唯一性</li>
-<li>加速表与表之间的连接</li>
-<li>使用分组和排序字句进行数据检索时，可以显著减少查询分组和排序的时间</li>
-</ul>
-<h4 id="索引队数据库系统的负面影响"><a href="#索引队数据库系统的负面影响" class="headerlink" title="索引队数据库系统的负面影响"></a>索引队数据库系统的负面影响</h4><ul>
-<li>创建和维护索引需要耗费时间，这个时间随着数据量的增加而增加</li>
-<li>索引需要占用物理空间，不光是表需要占用数据空间，每个索引也都需要占用物理空间。</li>
-<li>当对表进行增删改的时候索引也需要动态维护，这就降低了数据的维护速度</li>
-</ul>
-<h4 id="为数据表简历索引的原则"><a href="#为数据表简历索引的原则" class="headerlink" title="为数据表简历索引的原则"></a>为数据表简历索引的原则</h4><ul>
-<li>在最频繁使用的、用以缩小查询范围的字段上建立索引</li>
-<li>在频繁使用的、需要排序的字段上建立索引</li>
-</ul>
-<h4 id="什么情况下不宜建立索引"><a href="#什么情况下不宜建立索引" class="headerlink" title="什么情况下不宜建立索引"></a>什么情况下不宜建立索引</h4><ul>
-<li>查询中很少涉及的列或者是重复值比较多的列</li>
-<li>对于一些特殊的数据类型，比如text等</li>
-</ul>
-<h4 id="数据库索引中为什么使用B-树而不是其他的树形结构"><a href="#数据库索引中为什么使用B-树而不是其他的树形结构" class="headerlink" title="数据库索引中为什么使用B+树而不是其他的树形结构"></a>数据库索引中为什么使用B+树而不是其他的树形结构</h4><p>因为B树不管是叶子节点还是非叶子节点，都会保存数据，导致在非叶子节点中能保存的指针数量变少。</p>
-<p>指针少的情况下要保存大量的数据，只能增加树的高度，导致IO操作变多，查询性能变低。</p>
-]]></content>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mysql事务的隔离级别</title>
-    <url>/2021/03/25/Mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
-    <content><![CDATA[<p>Mysql中InnoDB支持四种事务隔离级别</p>
-<ol>
-<li>read uncommited：读到未提交数据</li>
-<li>read committed：不可重复读</li>
-<li>repeatable read：可重读、读提交</li>
-<li>serializable：串行事务</li>
+<h5 id="TCP的四次挥手"><a href="#TCP的四次挥手" class="headerlink" title="TCP的四次挥手"></a>TCP的四次挥手</h5><ol>
+<li>当主机A完成数据传输后，将控制位FIN置为1，提出停止TCP连接的请求</li>
+<li>主机B收到FIN后对其作出响应，确认这一方向的TCP连接将关闭，将ACK置为1</li>
+<li>由主机B端再提出反方向的关闭请求，将FIN置为1</li>
+<li>主机A对主机B的请求进行确认，将ACK置为1，双方向的关闭结束</li>
 </ol>
-<span id="more"></span>
-
-<p>mysql默认设置的隔离级别是repeatable read(可重复读)</p>
-<h4 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h4><p>MYSQL事务隔离是依靠锁来实现的，而未读提交是不加锁的，所以性能是最好的。</p>
-<p>任何事务队数据的修改都会第一时间暴露给其他的事务，即使事务还没有提交。</p>
-<p>读未提交，其实就是可以读到其他事务未提交的数据，但没有保证你读到的数据最终一定是提交之后的数据，如果中间发生回滚，那就回出现脏数据的问题。</p>
-<h4 id="可重读"><a href="#可重读" class="headerlink" title="可重读"></a>可重读</h4><p>可重读指的是在一个事务内，最开始读到了数据和事务结束前的任意时刻读到的同一批数据都是一致的。也就是事务不会读到其他事务对已有数据的修改，即使其他事务已经提交。但是，对于其他事务新插入的数据时可以读到的，这也就引发了幻读的问题。</p>
-<h4 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h4><p>对比可重复读，不可重复读指的是在同一事务内，不同的时刻读到的同一数据可能是不一样的，可能会受到其他事务的影响，比如其他事务改了这批数据并提交了。也就一个事务只能读到其他事务已经提交过的数据，也就是其他事务调用了commit命令之后的数据。</p>
-<h4 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h4><p>串行化是四种事务隔离级别中效果最好的，它将事务变为顺序执行，与其他的三个隔离级别相比，它就相当于单线程 ，后一个事务必须等待前一个事务结束</p>
+<h4 id="TCP的三次握手目的是什么？为什么不用两次和四次？"><a href="#TCP的三次握手目的是什么？为什么不用两次和四次？" class="headerlink" title="TCP的三次握手目的是什么？为什么不用两次和四次？"></a>TCP的三次握手目的是什么？为什么不用两次和四次？</h4><p><strong>TCP 三次握手的主要目的是防止失效的连接请求报文被服务端接受</strong></p>
+<p>  如果只有两次握手，假设当客户端发送第一次连接请求由于网络拥塞的原因，迟迟未到服务端，客户端没接收到确认报文，认为服务端没有收到，于是重新发送请求报文并与服务端建立连接，等这次连接断开了，之前滞留的那个请求报文又到达了服务端，就会让服务端与客户端再次连接成功，这时服务端就会一直等待客户端发送请求，造成了资源的浪费。</p>
+<p>  两次握手只能保证单向链路是可以通信的，理论上来说，要保证双向链路可以通信需要四次握手，但实际上服务端给客户端的 SYN 和 ACK 数据包可以合为一次握手，所以实际上只需要三次握手即可。</p>
+<h4 id="挥手为什么需要四次？三次不行吗？"><a href="#挥手为什么需要四次？三次不行吗？" class="headerlink" title="挥手为什么需要四次？三次不行吗？"></a>挥手为什么需要四次？三次不行吗？</h4><p>挥手阶段中服务端的 ACK 和 FIN 数据包不能合为一次。因为挥手阶段的流程为客户端发送FIN数据包表示自己发完了，服务端立即回复 ACK 数据包表示自己知道了，此时客户端到服务端的连接已经释放了，客户端不会再发送数据了，但服务端还可以继续向客户端发送数据，等到服务端也完成了数据发送，才会发送 FIN，这时客户端回复 ACK，就可以结束通信了。</p>
+<h4 id="TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？"><a href="#TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？" class="headerlink" title="TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？"></a>TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？</h4><p>因为客户端要保证他的 ACK 包顺利到达服务端，如果客户端的ACK数据包丢失，则服务端或重新发送 FIN 包到客户端，而这两个过程的最长时间为 1MSL，加起来为 2MSL，如果 2MSL 后客户端还没有收到服务端重发的 FIN 包，则说明 ACK 包顺利到达，可以关闭连接了。</p>
 ]]></content>
       <tags>
-        <tag>Mysql</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
-    <title>北京风行面试记录</title>
-    <url>/2021/03/25/%E5%8C%97%E4%BA%AC%E9%A3%8E%E8%A1%8C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>北京风行技术面面试记录</p>
+    <title>多益网络面试记录</title>
+    <url>/2021/03/12/%E5%A4%9A%E7%9B%8A%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>多益网络一面面试问题记录</p>
 <span id="more"></span>
 
 <ol>
-<li>Android四大组件是什么</li>
-<li>Activity的生命周期</li>
-<li>Activity的四种启动模式</li>
-<li>Service的两种启动方式以及他们的区别</li>
-<li>除了原生Android使用Java开发还有没有了解过Android的其他开发方式</li>
-<li>StringBuffer和StringBuilder的区别</li>
-<li>Android开发中有没有使用到什么第三方库</li>
-<li>什么是线程安全，用什么关键字可以保证线程安全</li>
-<li>讲一下Android的事件分发机制</li>
-<li>讲一下Java的垃圾回收机制</li>
-<li>Android中View的绘制过程</li>
-<li>有没有了解过Android Framework</li>
+<li><p>什么是面向对象？面向对象和面向过程有什么区别？</p>
+<p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
+<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
+</li>
+<li><p>ArrayList和LinkedList有什么区别？</p>
+<p>ArrayList是Array(动态数组)的数据结构，LinkedList是Link(链表)的数据结构。</p>
+<p>当随机访问List（get和set操作）时，ArrayList比LinkedList的效率更高，因为LinkedList是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p>
+<p>当对数据进行增加和删除的操作(add和remove操作)时，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
+<p>ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
+<p>ArrayList主要控件开销在于需要在lList列表预留一定空间；而LinkList主要控件开销在于需要存储结点信息以及结点指针信息。</p>
+</li>
+<li><p>链表和数组有什么区别？在什么时候应该使用链表/数组？</p>
+<p>数组便于查询，链表便于插入删除。数组节省空间但是长度固定，链表虽然变长但是占了更多的存储空间。</p>
+</li>
+<li><p>HashMap的实现方式，HashMap的底层数据结构是什么？</p>
+<p>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。</p>
+<p>HashMap的底层数据结构是数组+链表</p>
+<p>当链表长度大于等于8时会转换为红黑树</p>
+</li>
+<li><p>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</p>
+<p>快慢指针解决，时间复杂度为O(n)</p>
+</li>
+<li><p>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</p>
+<p>是指不提供加锁机制保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据。</p>
+<p>实现线程安全可以用Lock和synchronized</p>
+</li>
+<li><p>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</p>
+<p>回溯算法解决，时间复杂度：O*(<em>n</em>×*n!)，其中 n为序列的长度</p>
+</li>
+<li><p>数据库事物的四个基本特性是什么？</p>
+<ul>
+<li>原子性：即不可分割性，事务要么全部被执行，要么就全部不执行。</li>
+<li>一致性：事务的执行使得数据库以一种正确的状态转换成另一种正确状态。</li>
+<li>隔离性：在事务提交之前，不允许把该事务对数据的任何改变提供给任何其他事务。</li>
+<li>持久性：事务正确提交之后，其结果将永久保存在数据库中，即使事务提交后有了其他故障，事务的处理结果也会得到保存。</li>
+</ul>
+</li>
 </ol>
 ]]></content>
       <tags>
@@ -141,44 +121,413 @@
       </tags>
   </entry>
   <entry>
-    <title>Activity、Service和Fragment的生命周期</title>
-    <url>/2021/03/25/Activity%E3%80%81Service%E5%92%8CFragment%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
-    <content><![CDATA[<h3 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h3><p>Activity实例是由系统自动创建，并在不同的状态期间回调相应的方法。一个最简单的完整的Activity生命周期会按照如下顺序回调：onCreate -&gt; onStart -&gt; onResume -&gt; onPause -&gt; onStop -&gt; onDestroy。</p>
+    <title>从输入URL到网页呈现的过程</title>
+    <url>/2021/03/15/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E7%BD%91%E9%A1%B5%E5%91%88%E7%8E%B0%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<ul>
+<li>1、输入网址</li>
+<li>2、DNS解析</li>
+<li>3、建立tcp连接</li>
+<li>4、客户端发送HTPP请求</li>
+<li>5、服务器处理请求</li>
+<li>6、服务器响应请求</li>
+<li>7、浏览器展示HTML</li>
+<li>8、浏览器发送请求获取其他在HTML中的资源。</li>
+</ul>
 <span id="more"></span>
 
-<p>如下图所示：<img src="http://ailianblog.oss-cn-shenzhen.aliyuncs.com/activity/blog_activity_01.png" alt="image"></p>
-<p><strong>未完成，施工中</strong></p>
+<h4 id="1-域名解析"><a href="#1-域名解析" class="headerlink" title="1.域名解析"></a>1.域名解析</h4><p>当我们在浏览器中输入一个URL的时候首先需要解析为IP地址，这一过程叫做DNS解析</p>
+<p>DNS解析是一个递归查询的过程，例如我们解析“<a href="http://www.baidu.com”/">www.baidu.com”</a>    时过程是这样的：</p>
+<ul>
+<li>在本地域名服务器中查询IP地址，未找到域名</li>
+<li>本地域名服务器向根域名服务器发送请求，未找到域名</li>
+<li>本地服务器向.com顶级域名服务器发送请求，未找到域名</li>
+<li>本地域名服务器向.baidu.com域名服务器发送请求，找到该域名，并将对应的IP返回给本地域名服务器</li>
+</ul>
+<h4 id="2-TCP连接"><a href="#2-TCP连接" class="headerlink" title="2.TCP连接"></a>2.TCP连接</h4><p>HTTP协议是使用TCP协议作为其传输层协议的，在拿到服务器的IP地址后，浏览器客户端会与服务器建立TCP连接，该过程包括<a href="https://3xiaoxiao3.github.io/2021/03/14/TCP%E5%92%8CUDP/#more">三次握手</a> </p>
+<h4 id="3-浏览器发送HTTP请求"><a href="#3-浏览器发送HTTP请求" class="headerlink" title="3.浏览器发送HTTP请求"></a>3.浏览器发送HTTP请求</h4><p>浏览器构建http请求报文，并通过TCP协议传送到服务器的指定端口，http请求报文一共包括三个部分：</p>
+<ul>
+<li>请求行：指定http请求的方法、url、http协议版本等</li>
+<li>请求头：描述浏览器的相关信息，语言、编码等</li>
+<li>请求正文：当发送POST、PUT等请求时，通常需要向服务器传递数据。这些数据就储存在请求正文中。</li>
+</ul>
+<h4 id="4-服务器处理HTTP请求"><a href="#4-服务器处理HTTP请求" class="headerlink" title="4.服务器处理HTTP请求"></a>4.服务器处理HTTP请求</h4><p>服务器处理HTTP请求，并返回响应报文。响应报文包括三个部分：</p>
+<ul>
+<li>状态码：http服务常用的状态码及其含义如下</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">分类</th>
+<th align="left">分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1**</td>
+<td align="left">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td align="left">2**</td>
+<td align="left">成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td align="left">3**</td>
+<td align="left">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td align="left">4**</td>
+<td align="left">客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td align="left">5**</td>
+<td align="left">服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<ul>
+<li>响应头：包含了响应的相关信息，如日期等。</li>
+<li>响应正文：服务器返回给浏览器的文本信息，通常的 html、js、css、图片等就在这部分里。</li>
+</ul>
+<h4 id="5-浏览器页面渲染"><a href="#5-浏览器页面渲染" class="headerlink" title="5.浏览器页面渲染"></a>5.浏览器页面渲染</h4><p>浏览器接收到http服务器发送过来的响应报文，并开始解析HTML文档，渲染页面。具体的渲染过程包括：构建DOM树、构建渲染树、定位页面元素、绘制页面元素等</p>
+<h4 id="6-断开TCP连接"><a href="#6-断开TCP连接" class="headerlink" title="6.断开TCP连接"></a>6.断开TCP连接</h4><p>客户端与服务器四次挥手，断开TCP连接</p>
 ]]></content>
       <tags>
-        <tag>Android</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
-    <title>Activity的四种启动模式</title>
-    <url>/2021/03/25/Activity%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<p>Activity的启动模式可以在AndroidManifest.xml中，通过android:launchMode或者在Intent的Flag来设置实现。</p>
-<span id="more"></span>
+    <title>面向对象和面向过程</title>
+    <url>/2021/03/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="什么是面向对象？什么又是面向过程"><a href="#什么是面向对象？什么又是面向过程" class="headerlink" title="什么是面向对象？什么又是面向过程"></a>什么是面向对象？什么又是面向过程</h3><span id="more"></span>
 
-<h4 id="standard模式"><a href="#standard模式" class="headerlink" title="standard模式"></a>standard模式</h4><ul>
-<li><p>特点：Activity的默认启动模式</p>
-<p>每启动一个Activity就会在栈顶创建一个新的实例</p>
+<h4 id="面向对象：——行为化"><a href="#面向对象：——行为化" class="headerlink" title="面向对象：——行为化"></a>面向对象：——行为化</h4><p>面向对象就是把整个需求按照特点、功能划分，将这些存在共性的部分封装成类，创建了对象不是为了完成某一步骤，而是描述某个事物在解决问题的步骤中的行为</p>
+<h5 id="面向对象的三个基本特征"><a href="#面向对象的三个基本特征" class="headerlink" title="面向对象的三个基本特征"></a>面向对象的三个基本特征</h5><p>——封装、多态、继承</p>
+<ol>
+<li><h6 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h6><p>封装，也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行隐藏。</p>
 </li>
-<li><p>缺点：当Activity已经位于栈顶时，再次启动Activity时还需要创建一个新的实例，不能直接复用。</p>
+<li><h6 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h6><p>继承是指一种能力：它可以使用现有的类的所有功能，并且在无需重新编写原来类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或者是“派生类”，被继承的类称为“基类”、“父类”或者“超类”。</p>
 </li>
-</ul>
-<h4 id="singleTop-栈顶复用-模式"><a href="#singleTop-栈顶复用-模式" class="headerlink" title="singleTop(栈顶复用)模式"></a>singleTop(栈顶复用)模式</h4><ul>
-<li>特点：该模式会判断要启动的Activity实例是否位于栈顶，如果位于栈顶则直接复用，调用其onNewIntent()方法，否则创建新的实例。</li>
-<li>缺点：如果Activity并未处于栈顶位置，则还是可能会创建多个实例。</li>
-</ul>
-<h4 id="singleTask-栈内复用-模式"><a href="#singleTask-栈内复用-模式" class="headerlink" title="singleTask(栈内复用)模式"></a>singleTask(栈内复用)模式</h4><ul>
-<li>特点：Activity只会在任务栈里存在一个实例。如果要激活的Activity在任务栈里已经存在，就不会创建新的Activity，而是直接复用这个已经存在的Activity，调用其onNewIntent()方法，并且清空这个Activity任务栈上的所有Activity。</li>
-</ul>
-<h4 id="singleInstance-单一实例-模式"><a href="#singleInstance-单一实例-模式" class="headerlink" title="singleInstance(单一实例)模式"></a>singleInstance(单一实例)模式</h4><ul>
-<li>特点：整个手机操作系统中只有它一个实例存在，该模式的Activity会启动一个新的任务栈来管理Activity实例。无论从哪个任务栈中启动该Activity，都会是该Activity所在的任务栈转移到前台，从而使Activity显示。主要的作用是为了在不同程序中共享一个Activity实例。</li>
-</ul>
+<li><h6 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h6><p>多态性是允许你将父对象设置成为和一个或者更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给他的子对象的特性以及不同的方式运作。</p>
+<p>一句话理解：允许将子类类型的指针赋值给父类类型的指针。</p>
+<p>实现多态有两种方式：覆盖和重载，两种方式的区别在于：<strong>覆盖在运行时决定，重载是在编译时决定，而且覆盖和重载的机制不同。</strong>例如在Java中，重载方法的签名必须不同于原来方法的，但是对于覆盖签名必须相同。</p>
+</li>
+</ol>
+<h4 id="面向过程——步骤化"><a href="#面向过程——步骤化" class="headerlink" title="面向过程——步骤化"></a>面向过程——步骤化</h4><p>面向过程就是分析出实现需求所需要的步骤，通过函数（方法）一步步实现这些步骤，接着依次调用即可。</p>
+<h3 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h3><p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
+<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
 ]]></content>
       <tags>
-        <tag>Android</tag>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高频考点：ArrayList和LinkedList</title>
+    <url>/2021/03/16/%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%9AArrayList%E5%92%8CLinkedList/</url>
+    <content><![CDATA[<h3 id="ArrayList和LinkedList的主要区别"><a href="#ArrayList和LinkedList的主要区别" class="headerlink" title="ArrayList和LinkedList的主要区别"></a>ArrayList和LinkedList的主要区别</h3><span id="more"></span>
+
+<p>1.LinkedList和ArrayList的差别主要来源于其二者的数据结构不同。<strong>ArrayList是基于动态数组实现的</strong>，<strong>LinkedList是基于双链表实现的</strong>。另外LinkedList类可以根据索引来随机访问集合中的元素，还实现了Deque接口，Deque接口是Queue接口的子接口，代表了一个双向队列，因此LinkedList可以作为双向队列、栈和List集合使用</p>
+<p>2.因为Array是基于索引的数据结构，它使用索引在数组中搜索和读取数据时很快的，可以直接返回数组中index位置的元素，因此在随机访问集合元素上有较好的性能。Array获取数据的时间复杂度是O(1)，<strong>但是要插入、删除数据时开销会很大，因为需要移动数组中插入/删除位置之后的所有元素</strong>。</p>
+<p>3.相对于ArrayList，<strong>LinkedList的随机访问集合元素时性能较差，因为需要在双向链表中找到index的位置再返回</strong>；但在进行插入、删除操作时比前者要快，因为LinkedList不像ArrayList，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组中。</p>
+<p>4.LinkedList相较于ArrayList需要更多的内存，因为ArrayList的每个索引的位置都是实际的数据，而LinkedList中的每个节点存储的实际上是数据和前后节点的位置</p>
+<h3 id="两者的使用场景"><a href="#两者的使用场景" class="headerlink" title="两者的使用场景"></a>两者的使用场景</h3><p>当应用队数据有较多的随机访问时，ArrayList要优于LinkedList</p>
+<p>如果应用有更多的插入或者删除操作，随机访问较少，LinkedList要优于ArrayList。</p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+        <tag>数据结构</tag>
+        <tag>重点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP与HTTPS</title>
+    <url>/2021/03/16/HTTP%E4%B8%8EHTTPS/</url>
+    <content><![CDATA[<h3 id="一、HTTP和HTTPS的基本概念"><a href="#一、HTTP和HTTPS的基本概念" class="headerlink" title="一、HTTP和HTTPS的基本概念"></a>一、HTTP和HTTPS的基本概念</h3><p>HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器请求和应答的标准(TCP)，用于从Web服务器传输超文本到本地浏览器的传输协议。</p>
+<p>HTTPS：是以安全为目标的HTTP通道，即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。HTTP开发的主要目的是提供对网站服务器的身份认证，保护交换数据的隐私和完整性</p>
+<span id="more"></span>
+
+<h3 id="二、HTTP的工作原理"><a href="#二、HTTP的工作原理" class="headerlink" title="二、HTTP的工作原理"></a>二、HTTP的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130120012190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>客户端与服务器建立TCP连接(三次握手)</li>
+<li>连接成功后，客户端发送请求给服务器</li>
+<li>服务器接收到客户端发送的消息后作出响应，并将响应信息发给客户端</li>
+<li>服务器发送玩响应信息后，就会断开TCP连接，因此HTTP是无状态的，下一次访问的时候不知道之前访问的过程</li>
+<li>客户端收到响应信息，浏览器开始解析，将HTML文档解析后呈现在浏览器上</li>
+</ol>
+<h3 id="三、HTTPS的工作原理"><a href="#三、HTTPS的工作原理" class="headerlink" title="三、HTTPS的工作原理"></a>三、HTTPS的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130113922972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li><p>客户端发起HTTPS请求</p>
+<p>用户在浏览器中输入一个HTTPS网址，连接到server的443端口</p>
+</li>
+<li><p>传送证书</p>
+<p>采用HTTPS协议的服务器必须要有一套数字证书，这套证书其实就是一对公钥和私钥。</p>
+<p>服务器将证书发送给客户端，这个证书其实就是公钥，只是包含了很多信息，比如证书的颁发机构，过期时间等</p>
+</li>
+<li><p>客户端解析证书</p>
+<p>这部分工作是由客户端的TLS完成的，首先会验证公钥是否有效，如果发现异常就会弹出一个警告，提示证书存在问题</p>
+</li>
+<li><p>生成随机秘钥</p>
+<p>如果证书没有问题，那就生成一个随机对称秘钥</p>
+</li>
+<li><p>加密对称秘钥</p>
+<p>公钥对该对称秘钥进行加密。</p>
+</li>
+<li><p>传送加密信息</p>
+<p>将加密后的对称秘钥发送给服务器，目的是让服务端得到对称秘钥，这样以后客户端和服务端的通信就可以通过这个对称秘钥进行加密和解密了。</p>
+</li>
+<li><p>服务端解密信息</p>
+<p>服务端用私钥解密后便得到客户端传过来的对称秘钥，然后把内容通过该秘钥进行对称加密</p>
+<p>所谓对称加密就是将信息和对称秘钥通过算法混合在一起，这样除非知道对称秘钥，不然无法获取内容。</p>
+</li>
+<li><p>传输加密后的信息</p>
+<p>这部分信息是服务器用对称秘钥加密后的信息，可以在客户端被还原</p>
+</li>
+<li><p>客户端解密信息</p>
+<p>客户端用之前生成的对称秘钥解密服务端传过来的信息，获取内容。</p>
+</li>
+</ol>
+<h3 id="四、HTTP和HTTPS的区别"><a href="#四、HTTP和HTTPS的区别" class="headerlink" title="四、HTTP和HTTPS的区别"></a>四、HTTP和HTTPS的区别</h3><ol>
+<li>HTTPS协议需要到CA申请证书，一般免费证书较少，因而需要一定费用</li>
+<li>HTTP是超文本传输协议，信息是明文传输的，数据是不加密的，而HTTPS则是具有安全性的SSL加密传输协议。</li>
+<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，HTTP是80端口而HTTPS是443端口</li>
+<li>HTTP的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比HTTP协议要安全</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>重点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java中的锁</title>
+    <url>/2021/03/17/Java%E4%B8%AD%E7%9A%84%E9%94%81/</url>
+    <content><![CDATA[<h3 id="1-锁的-7-大分类"><a href="#1-锁的-7-大分类" class="headerlink" title="1.锁的 7 大分类"></a>1.锁的 7 大分类</h3><ul>
+<li>偏向锁/轻量级锁/重量级锁</li>
+<li>可重入锁/非可重入锁</li>
+<li>共享锁/独占锁</li>
+<li>公平锁/非公平锁</li>
+<li>悲观锁/乐观锁</li>
+<li>自旋锁/非自旋锁</li>
+<li>可中断锁/不可中断锁</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="2-偏向锁-轻量级锁-重量级锁"><a href="#2-偏向锁-轻量级锁-重量级锁" class="headerlink" title="2.偏向锁/轻量级锁/重量级锁"></a>2.偏向锁/轻量级锁/重量级锁</h3><ul>
+<li><p>偏向锁<br>如果自始至终，对于这把锁都不存在竞争，那么其实就没必要上锁，只需要打个标记就行了，这就是偏向锁的思想。一个对象被初始化后，还没有任何线程来获取它的锁时，那么它就是可偏向的，当有第一个线程来访问它并尝试获取锁的时候，它就将这个线程记录下来，以后如果尝试获取锁的线程正是偏向锁的拥有者，就可以直接获得锁，开销很小，性能最好。</p>
+</li>
+<li><p>轻量级锁<br>JVM 开发者发现在很多情况下，synchronized 中的代码是被多个线程交替执行的，而不是同时执行的，也就是说并不存在实际的竞争，或者是只有短时间的锁竞争，用 CAS 就可以解决，这种情况下，用完全互斥的重量级锁是没必要的。轻量级锁是指当锁原来是偏向锁的时候，被另一个线程访问，说明存在竞争，那么偏向锁就会升级为轻量级锁，线程会通过自旋的形式尝试获取锁，而不会陷入阻塞。</p>
+</li>
+<li><p>重量级锁<br>重量级锁是互斥锁，它是利用操作系统的同步机制实现的，所以开销相对比较大。当多个线程直接有实际竞争，且锁竞争时间长的时候，轻量级锁不能满足需求，锁就会膨胀为重量级锁。重量级锁会让其他申请却拿不到锁的线程进入阻塞状态。</p>
+</li>
+</ul>
+<p>锁升级的路径：无锁→偏向锁→轻量级锁→重量级锁。</p>
+<h3 id="3-可重入锁-非可重入锁"><a href="#3-可重入锁-非可重入锁" class="headerlink" title="3.可重入锁/非可重入锁"></a>3.可重入锁/非可重入锁</h3><p>可重入锁指的是线程当前已经持有这把锁了，能在不释放这把锁的情况下，再次获取这把锁。不可重入锁指的是虽然线程当前持有了这把锁，但是如果想再次获取这把锁，也必须要先释放锁后才能再次尝试获取。</p>
+<h4 id="可重入锁作用和使用场景"><a href="#可重入锁作用和使用场景" class="headerlink" title="可重入锁作用和使用场景"></a>可重入锁作用和使用场景</h4><ol>
+<li>最大的作用是避免死锁</li>
+<li>当一个线程执行一个带锁的代码块或方法，同时代码块或方法里也获取了同一个锁。为了避免死锁此时就可以使用可重入锁。</li>
+</ol>
+<h3 id="4-共享锁-独占锁"><a href="#4-共享锁-独占锁" class="headerlink" title="4.共享锁/独占锁"></a>4.共享锁/独占锁</h3><p>共享锁指的是我们同一把锁可以被多个线程同时获得，而独占锁指的就是，这把锁只能同时被一个线程获得。读写锁中的读锁，是共享锁，而写锁是独占锁。读锁可以被同时读，可以同时被多个线程持有，而写锁最多只能同时被一个线程持有。</p>
+<h3 id="5-公平锁-非公平锁"><a href="#5-公平锁-非公平锁" class="headerlink" title="5.公平锁/非公平锁"></a>5.公平锁/非公平锁</h3><p>公平锁的公平的含义在于如果线程现在拿不到这把锁，那么线程就都会进入等待，开始排队，在等待队列里等待时间长的线程会优先拿到这把锁，。而非公平锁会在一定情况下忽略掉已经在排队的线程，发生插队现象</p>
+<h3 id="6-悲观锁-乐观锁"><a href="#6-悲观锁-乐观锁" class="headerlink" title="6.悲观锁/乐观锁"></a>6.悲观锁/乐观锁</h3><p>悲观锁会悲观的认为多个线程操作数据一定会产生问题，因此在获取资源之前必须先拿到锁。</p>
+<p>而乐观锁则恰恰相反，认为同一个数据的并发操作是不会发生修改的，因此在更新数据的时候会采用尝试更新，不断更新数据，乐观的认为不加锁的并发操作是没有问题的。</p>
+<h4 id="乐观锁的实现："><a href="#乐观锁的实现：" class="headerlink" title="乐观锁的实现："></a>乐观锁的实现：</h4><ol>
+<li><p>CAS：当多个线程尝试使用CAS同时更新一个变量时，只有其中一个线程能更新变量的值，而其他线程都会失败，失败的线程并不会挂起，而是被告知这次竞争中失败，并且可以再次尝试，CAS是一种非阻塞式的同步方式。</p>
+<p>CAS操作包含三个操作数——内存位置、预期原值和新值。如果内存位置的值与预期原值相匹配，那么处理器会自动将该位置更新为新值。否则不做任何操作。</p>
+<p><strong>乐观锁是一种思想，而CAS是这种思想的一种实现方式</strong></p>
+</li>
+<li><p>版本号控制：一般在数据表中加上一个数据版本号version字段，表示数据被修改的次数。当数据被修改时，version值会+1。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值与当前数据库中的version值相等才会更新数据，否则重试更新操作，直到更新成功</p>
+</li>
+</ol>
+<h3 id="7-自旋锁和非自旋锁"><a href="#7-自旋锁和非自旋锁" class="headerlink" title="7.自旋锁和非自旋锁"></a>7.自旋锁和非自旋锁</h3><p>自旋锁的理念是如果线程现在拿不到锁，并不直接陷入阻塞或者释放CPU资源，而是开始利用循环，不停尝试获取锁，这个循环过程被称为“自旋”。相反，非自旋锁就是没有自旋的过程，如果拿不到锁就直接放弃或者进行其他的逻辑处理。</p>
+<h3 id="8-可中断锁-不可中断锁"><a href="#8-可中断锁-不可中断锁" class="headerlink" title="8.可中断锁/不可中断锁"></a>8.可中断锁/不可中断锁</h3><p>在Java中，synchronized关键字修饰的锁代表的是不可中断锁，一旦线程申请了锁，就只能等待拿到锁之后才能进行其他的逻辑处理，而ReentrantLock就是一种可中断锁，在获取锁的过程中突然不想获取了也可以在中断之后去做其他的事情，并不需要一直等到获取到锁才离开。</p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP请求报文</title>
+    <url>/2021/03/17/HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%88%E8%AF%B7%E6%B1%82%E8%A1%8C%E3%80%81%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93%EF%BC%89/</url>
+    <content><![CDATA[<p>HTTP请求报文由三部分组成：请求行、请求头和请求体</p>
+<span id="more"></span>
+
+<ol>
+<li>请求行：包含请求方法，请求的URI和HTTP版本</li>
+<li>状态行：包含响应结果的状态码</li>
+<li>首部字段：包含请求和响应的各种条件、属性的各类首部</li>
+<li>其他：包含未定义的首部比如cookie等</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类的初始化、加载和实例化的过程</title>
+    <url>/2021/03/19/%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="一、一个类及对象初始化的过程"><a href="#一、一个类及对象初始化的过程" class="headerlink" title="一、一个类及对象初始化的过程"></a>一、一个类及对象初始化的过程</h3><span id="more"></span>
+
+<h4 id="什么时候需要初始化一个类"><a href="#什么时候需要初始化一个类" class="headerlink" title="什么时候需要初始化一个类"></a>什么时候需要初始化一个类</h4><p>首次创建某个对象时</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog dog = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
+
+<p>或是首次访问某个类的静态方法或者是静态字段的时候</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog.staticFields;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获得类的资源"><a href="#获得类的资源" class="headerlink" title="获得类的资源"></a>获得类的资源</h4><p>然后JVM就会载入Dog.class，生成一个class对象。这个时候如果有静态的方法或者变量，静态初始化的动作都会被执行。<strong>静态初始化在程序运行过程中只会在Class对象首次加载的时候运行一次，这些资源都会放在JVM的方法区</strong>。</p>
+<p>方法区又叫静态区，和堆一样，被所有的线程共享。</p>
+<p>方法区包含的都是在整个程序中永远唯一的元素，包含所有的class和static变量</p>
+<h4 id="初始化对象Dog-dog-new-Dog"><a href="#初始化对象Dog-dog-new-Dog" class="headerlink" title="初始化对象Dog dog = new Dog()"></a>初始化对象Dog dog = new Dog()</h4><ul>
+<li>第一次创建Dog对象先执行上面的一二步</li>
+<li>在堆上为Dog对象分配足够的存储空间，所有属性和方法都被设置成默认值(数字为0，字符为null，布尔为false，而所有引用被设置成null)</li>
+<li>执行构造函数时检查是否有父类，如果有父类就会先调用父类的构造函数，这里假设Dog没有父类，执行默认值字段的赋值即方法的初始化动作</li>
+<li>执行构造函数</li>
+</ul>
+<hr>
+<h4 id="有父类情况下的初始化"><a href="#有父类情况下的初始化" class="headerlink" title="有父类情况下的初始化"></a>有父类情况下的初始化</h4><p>假设Dog extends Animal</p>
+<ol>
+<li><p>执行第一步，找出Dog.class文件，接着在加载过程中会发现他有一个基类，于是先执行Animal类的第一二步，加载其静态方法和变量，加载结束之后再加载子类Dog的静态方法和变量。</p>
+<p>如果Animal类还有父类就继续类推，最终的基类叫做根基类</p>
+<p><strong>因为子类的static初始化可能会依赖父类的静态资源，所以要先加载父类的静态资源。</strong></p>
+</li>
+<li><p>接着new Dog对象，先为Dog对象分配存储空间-&gt;到Dog的构造函数-&gt;创建默认的属性。这里其构造函数中有一个隐含的super()，即父类构造函数，所以这时候会跳转到父类Animal的构造函数。</p>
+<p>Java会帮我们完成构造函数的补充，Dog实际隐式的构造函数如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog()&#123;</span><br><span class="line">	<span class="comment">//创建默认的属性和方法</span></span><br><span class="line">	<span class="comment">//调用父类的构造函数super()(可显式写出)</span></span><br><span class="line">	<span class="comment">//对默认属性和方法分别进行赋值和初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>父类Animal执行构造函数之前也是先分配存储空间-&gt;到其的构造函数-&gt;创建默认的属性，接着发现自己已经没有父类了，这时就给它的默认的属性赋值和方法的初始化</p>
+</li>
+<li><p>接着执行构造函数余下的部分，结束后跳转到子类Dog的构造函数。</p>
+</li>
+<li><p>子类Dog对默认属性和方法分别进行赋值和初始化，接着完成构造函数接下来的部分</p>
+</li>
+</ol>
+<h5 id="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"><a href="#为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？" class="headerlink" title="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"></a>为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？</h5><p>因为子类的非静态变量和方法的初始化有可能使用到其父类的属性或方法，所以子类构造默认的属性的方法之后不应该进行赋值，而要跳转到父类的构造方法完成父类对象的构造之后，才来队自己的属性和方法进行初始化。</p>
+<p>因此子类的构造函数显示调用父类构造函数super()时要强制写在第一行的原因，程序需要跳转到父类构造函数完成父类对象的构造之后才能执行子类构造函数的余下部分。</p>
+<h5 id="为什么对属性和方法初始化之后再执行构造函数的其他部分？"><a href="#为什么对属性和方法初始化之后再执行构造函数的其他部分？" class="headerlink" title="为什么对属性和方法初始化之后再执行构造函数的其他部分？"></a>为什么对属性和方法初始化之后再执行构造函数的其他部分？</h5><p>因为构造函数中的显式部分有可能使用到对象的属性和方法。</p>
+<h5 id="初始化块的执行顺序"><a href="#初始化块的执行顺序" class="headerlink" title="初始化块的执行顺序"></a>初始化块的执行顺序</h5><p>首先static初始化块是在构造函数之前执行的，而且只执行一次，即类首次加载时。</p>
+<p>初始化是在类加载的时候完成的，而构造方法是生成对象的，是在类加载之后完成的，所以先执行初始化块</p>
+<p>初始化块分为静态和非静态，静态初始化块是执行一次，无论new多少次，它只会执行一次。</p>
+<p>而非静态初始化块则不是这样，每次new都会执行，而执行顺序是先静态后非静态。</p>
+<p><strong>无论静态或者是非静态，它们的执行顺序都在构造方法之前执行</strong></p>
+<p>在你在父类方法的情况下：<strong>在执行完非静态块后立即执行其构造函数然后执行子类的非静态代码块然后执行子类的构造方法。</strong></p>
+<h3 id="二、类实例化"><a href="#二、类实例化" class="headerlink" title="二、类实例化"></a>二、类实例化</h3><h4 id="类实例化的时机"><a href="#类实例化的时机" class="headerlink" title="类实例化的时机"></a>类实例化的时机</h4><p>一般是使用new和反射的时候</p>
+<h4 id="类实例化的过程"><a href="#类实例化的过程" class="headerlink" title="类实例化的过程"></a>类实例化的过程</h4><ol>
+<li><p>前提：.class文件已被加载完毕(经过加载、解析和初始化)</p>
+</li>
+<li><p>系统赋初值：在堆内存中为xxx类及其父类中的非静态成员变量开辟空间，并赋系统默认初值(0，null，false)，因为成员变量有初值，函数才能使用。</p>
+<p>即使子类覆盖了父类成员变量，仍会给父类所有成员变量分配空间，此时子类中多了一个属性，分态性，空间储存，分别存储父类和子类的成员变量。</p>
+</li>
+<li><p>父类成员变量的显式初始化和构造代码块的初始化</p>
+<p>两者的执行顺序就是代码排列顺序(和静态变量显示初始化和静态构造代码块初始化一样)，但和前面静态一样，当构造代码块在前二成员变量声明在后时，构造代码块中只能赋值，不能访问。另外实际上两者都会被自动装入父类构造函数的最前面</p>
+</li>
+<li><p>父类构造函数执行</p>
+<p>Java强制要求Object对象之外的所有类的构造函数的第一条语句必须是超类构造函数的调用语句，以保证所创建实例的完整性。</p>
+</li>
+<li><p>成员变量的显式初始化和子类构造代码块的初始化</p>
+</li>
+<li><p>构造函数初始化</p>
+<p>每一个Java中的对象都至少会有一个构造函数，如果没有显式定义构造函数，那么JVM会自动生成一个默认无参的构造函数。在编译生成的字节码中，这些构造函数会被命名为<init>()方法。参数列表与Java语言书写的构造函数的参数列表相同。</p>
+</li>
+</ol>
+<h4 id="类的加载机制和实例化的区别"><a href="#类的加载机制和实例化的区别" class="headerlink" title="类的加载机制和实例化的区别"></a>类的加载机制和实例化的区别</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>类的加载机制</th>
+<th>类的实例化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是什么</td>
+<td>把类从.class文件加载到虚拟机，为实例化做准备</td>
+<td>创建一个类的实例(对象)的过程</td>
+</tr>
+<tr>
+<td>实例化的对象</td>
+<td>只有类变量按照程序代码被赋值（<clinit>()方法的执行）</td>
+<td>非静态变量的初始化，以及构造方法的执行（&lt;init()方法的执行）</td>
+</tr>
+<tr>
+<td>执行次数</td>
+<td>一个类只会执行1次</td>
+<td>一个类可执行多次</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP1、2、3</title>
+    <url>/2021/03/21/HTTP1%E3%80%812%E3%80%813/</url>
+    <content><![CDATA[<h2 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP/1.1"></a>HTTP/1.1</h2><span id="more"></span>
+
+<h3 id="HTTP的工作流程"><a href="#HTTP的工作流程" class="headerlink" title="HTTP的工作流程"></a>HTTP的工作流程</h3><ol>
+<li>浏览器与服务器建立TCP连接，即三次握手</li>
+<li>TCP连接成功，浏览器发送HTTP请求命令</li>
+<li>服务器接收到请求并返回HTTP响应</li>
+<li>服务器关闭连接，即四次挥手</li>
+<li>浏览器解析请求的资源</li>
+</ol>
+<p>Connection:keep-alive可以让TCP连接保持打开，浏览器可继续通过相同的连接发送请求。HTTP1.1所有的请求都是默认保持持续连接的</p>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li><p>高延迟，队头阻塞，贷款无法充分利用</p>
+<p>队头阻塞是指当顺序发送的请求序列中的一个请求因为某种原因被阻塞时，在后面排队的所有请求也都会被阻塞，会导致客户端迟迟收不到数据。</p>
+</li>
+<li><p>无状态特性带来的巨大的头部</p>
+<ol>
+<li>携带过多的header信息，如user-agent,cookie,accept等</li>
+<li>请求报文有过多的重复字段，浪费资源</li>
+</ol>
+</li>
+<li><p>明文传输的不安全性</p>
+</li>
+<li><p>不支持服务推送</p>
+</li>
+</ul>
+<h2 id="HTTP-2"><a href="#HTTP-2" class="headerlink" title="HTTP/2"></a>HTTP/2</h2><h3 id="SPDY协议"><a href="#SPDY协议" class="headerlink" title="SPDY协议"></a>SPDY协议</h3><p>HTTP/2是HTTP/1.x的代替，但不是重写，HTTP方法/状态码/语义都和HTTP/1.x一样。HTTP/2基于SPDY，专注于性能。</p>
+<h3 id="二进制传输"><a href="#二进制传输" class="headerlink" title="二进制传输"></a>二进制传输</h3><h5 id="HTTP-2将请求和响应数据分割为更小的帧，并且采用的是二进制编码"><a href="#HTTP-2将请求和响应数据分割为更小的帧，并且采用的是二进制编码" class="headerlink" title="HTTP/2将请求和响应数据分割为更小的帧，并且采用的是二进制编码"></a>HTTP/2将请求和响应数据分割为更小的帧，并且采用的是二进制编码</h5><p>它把TCP协议的部分特性挪到了应用层，把原来的“Header+Body”的消息“打散”为数个小片的二进制“帧”，用”HEADERS”帧存放头数据、”DATA”帧存放实体数据。HTP/2数据分帧后”Header+Body”的报文结构就完全消失了，协议看见的只是一个个的”碎片”。</p>
+<p>HTTP/2中，同域名下的所有通信都在单个连接上完成，该连接可以承载任意数量的双向数据流。每个数据流都以消息的形式发送，而消息又由有一个或多个帧组成<strong>。多个帧之间可以乱序发送，根据首部的流标识可以重新组装。</strong></p>
+<h5 id="Header压缩"><a href="#Header压缩" class="headerlink" title="Header压缩"></a>Header压缩</h5><p>采用HPACK算法压缩头部，压缩率为50%-90%</p>
+<p>同时，同一个域名下的两个请求，只会发送差异数据，减少冗余的数据传输，降低开销</p>
+<h5 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h5><ul>
+<li>同一个域名下的所有通信都在单个连接上完成</li>
+<li>单个连接可以承载任意数量的双向数据流</li>
+<li>数据流以消息的形式发送，而消息由一个或多个帧组成，可以乱序发送，因为根据帧首部的流标识可以重新组装</li>
+</ul>
+<p>好处：</p>
+<ol>
+<li>同一个页面，只需要一个TCP慢连接的过程</li>
+<li>可以并行交错的发送请求且互不影响</li>
+</ol>
+<h5 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h5><p>服务端 新建”流”主动向客户端发送消息，提前推送客户端需要的静态资源，减少等待的延迟</p>
+<h5 id="提高安全性"><a href="#提高安全性" class="headerlink" title="提高安全性"></a>提高安全性</h5><p>HTTP2支持使用https进行加密传输</p>
+<h3 id="缺陷-1"><a href="#缺陷-1" class="headerlink" title="缺陷"></a>缺陷</h3><ol>
+<li><p><strong>TCP+TLS建立连接的时间是主要瓶颈</strong></p>
+</li>
+<li><p>没有从根本上解决头阻塞问题，一旦丢包，TCP协议还是会重新发送数据。</p>
+<p>HTTP2出现丢包时，整个TCP都要等待重传，那么就会阻塞该TCPO连接中的所有请求。</p>
+</li>
+<li><p>多路复用导致服务器压力上升</p>
+<p>多路复用没有限制同时请求数，请求的平均数量与往常相同，但实际上会有许多请求的短暂爆发</p>
+</li>
+<li><p>多路复用容易Timeout</p>
+<p>大批量的请求同时发送，由于HTTP2连接内存在多个并行的流，而网络带宽和服务器资源有限，每个流的资源会被稀释虽然它们开始时间相差更短，但都有可能超时。</p>
+</li>
+</ol>
+<h2 id="HTTP-3"><a href="#HTTP-3" class="headerlink" title="HTTP/3"></a>HTTP/3</h2><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><p>基于UDP协议，真正完美解决了队头堵塞的问题</p>
+<h3 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h3><ol>
+<li><p>改进了拥塞控制，可靠传输</p>
+</li>
+<li><p>快速握手</p>
+<p>由于QUIC是基于UDP的，因此QUIC可以实现0-RTT或者1-RTT来建立连接，可以大大提升首次打开页面的速度</p>
+</li>
+<li><p>集成了TLS1.3加密</p>
+</li>
+<li><p>多路复用</p>
+</li>
+<li><p>连接迁移</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -287,522 +636,175 @@
       </tags>
   </entry>
   <entry>
-    <title>HTTP1、2、3</title>
-    <url>/2021/03/21/HTTP1%E3%80%812%E3%80%813/</url>
-    <content><![CDATA[<h2 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP/1.1"></a>HTTP/1.1</h2><span id="more"></span>
-
-<h3 id="HTTP的工作流程"><a href="#HTTP的工作流程" class="headerlink" title="HTTP的工作流程"></a>HTTP的工作流程</h3><ol>
-<li>浏览器与服务器建立TCP连接，即三次握手</li>
-<li>TCP连接成功，浏览器发送HTTP请求命令</li>
-<li>服务器接收到请求并返回HTTP响应</li>
-<li>服务器关闭连接，即四次挥手</li>
-<li>浏览器解析请求的资源</li>
-</ol>
-<p>Connection:keep-alive可以让TCP连接保持打开，浏览器可继续通过相同的连接发送请求。HTTP1.1所有的请求都是默认保持持续连接的</p>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
-<li><p>高延迟，队头阻塞，贷款无法充分利用</p>
-<p>队头阻塞是指当顺序发送的请求序列中的一个请求因为某种原因被阻塞时，在后面排队的所有请求也都会被阻塞，会导致客户端迟迟收不到数据。</p>
-</li>
-<li><p>无状态特性带来的巨大的头部</p>
-<ol>
-<li>携带过多的header信息，如user-agent,cookie,accept等</li>
-<li>请求报文有过多的重复字段，浪费资源</li>
-</ol>
-</li>
-<li><p>明文传输的不安全性</p>
-</li>
-<li><p>不支持服务推送</p>
-</li>
-</ul>
-<h2 id="HTTP-2"><a href="#HTTP-2" class="headerlink" title="HTTP/2"></a>HTTP/2</h2><h3 id="SPDY协议"><a href="#SPDY协议" class="headerlink" title="SPDY协议"></a>SPDY协议</h3><p>HTTP/2是HTTP/1.x的代替，但不是重写，HTTP方法/状态码/语义都和HTTP/1.x一样。HTTP/2基于SPDY，专注于性能。</p>
-<h3 id="二进制传输"><a href="#二进制传输" class="headerlink" title="二进制传输"></a>二进制传输</h3><h5 id="HTTP-2将请求和响应数据分割为更小的帧，并且采用的是二进制编码"><a href="#HTTP-2将请求和响应数据分割为更小的帧，并且采用的是二进制编码" class="headerlink" title="HTTP/2将请求和响应数据分割为更小的帧，并且采用的是二进制编码"></a>HTTP/2将请求和响应数据分割为更小的帧，并且采用的是二进制编码</h5><p>它把TCP协议的部分特性挪到了应用层，把原来的“Header+Body”的消息“打散”为数个小片的二进制“帧”，用”HEADERS”帧存放头数据、”DATA”帧存放实体数据。HTP/2数据分帧后”Header+Body”的报文结构就完全消失了，协议看见的只是一个个的”碎片”。</p>
-<p>HTTP/2中，同域名下的所有通信都在单个连接上完成，该连接可以承载任意数量的双向数据流。每个数据流都以消息的形式发送，而消息又由有一个或多个帧组成<strong>。多个帧之间可以乱序发送，根据首部的流标识可以重新组装。</strong></p>
-<h5 id="Header压缩"><a href="#Header压缩" class="headerlink" title="Header压缩"></a>Header压缩</h5><p>采用HPACK算法压缩头部，压缩率为50%-90%</p>
-<p>同时，同一个域名下的两个请求，只会发送差异数据，减少冗余的数据传输，降低开销</p>
-<h5 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h5><ul>
-<li>同一个域名下的所有通信都在单个连接上完成</li>
-<li>单个连接可以承载任意数量的双向数据流</li>
-<li>数据流以消息的形式发送，而消息由一个或多个帧组成，可以乱序发送，因为根据帧首部的流标识可以重新组装</li>
-</ul>
-<p>好处：</p>
-<ol>
-<li>同一个页面，只需要一个TCP慢连接的过程</li>
-<li>可以并行交错的发送请求且互不影响</li>
-</ol>
-<h5 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h5><p>服务端 新建”流”主动向客户端发送消息，提前推送客户端需要的静态资源，减少等待的延迟</p>
-<h5 id="提高安全性"><a href="#提高安全性" class="headerlink" title="提高安全性"></a>提高安全性</h5><p>HTTP2支持使用https进行加密传输</p>
-<h3 id="缺陷-1"><a href="#缺陷-1" class="headerlink" title="缺陷"></a>缺陷</h3><ol>
-<li><p><strong>TCP+TLS建立连接的时间是主要瓶颈</strong></p>
-</li>
-<li><p>没有从根本上解决头阻塞问题，一旦丢包，TCP协议还是会重新发送数据。</p>
-<p>HTTP2出现丢包时，整个TCP都要等待重传，那么就会阻塞该TCPO连接中的所有请求。</p>
-</li>
-<li><p>多路复用导致服务器压力上升</p>
-<p>多路复用没有限制同时请求数，请求的平均数量与往常相同，但实际上会有许多请求的短暂爆发</p>
-</li>
-<li><p>多路复用容易Timeout</p>
-<p>大批量的请求同时发送，由于HTTP2连接内存在多个并行的流，而网络带宽和服务器资源有限，每个流的资源会被稀释虽然它们开始时间相差更短，但都有可能超时。</p>
-</li>
-</ol>
-<h2 id="HTTP-3"><a href="#HTTP-3" class="headerlink" title="HTTP/3"></a>HTTP/3</h2><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><p>基于UDP协议，真正完美解决了队头堵塞的问题</p>
-<h3 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h3><ol>
-<li><p>改进了拥塞控制，可靠传输</p>
-</li>
-<li><p>快速握手</p>
-<p>由于QUIC是基于UDP的，因此QUIC可以实现0-RTT或者1-RTT来建立连接，可以大大提升首次打开页面的速度</p>
-</li>
-<li><p>集成了TLS1.3加密</p>
-</li>
-<li><p>多路复用</p>
-</li>
-<li><p>连接迁移</p>
-</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>类的初始化、加载和实例化的过程</title>
-    <url>/2021/03/19/%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="一、一个类及对象初始化的过程"><a href="#一、一个类及对象初始化的过程" class="headerlink" title="一、一个类及对象初始化的过程"></a>一、一个类及对象初始化的过程</h3><span id="more"></span>
-
-<h4 id="什么时候需要初始化一个类"><a href="#什么时候需要初始化一个类" class="headerlink" title="什么时候需要初始化一个类"></a>什么时候需要初始化一个类</h4><p>首次创建某个对象时</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog dog = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
-
-<p>或是首次访问某个类的静态方法或者是静态字段的时候</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog.staticFields;</span><br></pre></td></tr></table></figure>
-
-<h4 id="获得类的资源"><a href="#获得类的资源" class="headerlink" title="获得类的资源"></a>获得类的资源</h4><p>然后JVM就会载入Dog.class，生成一个class对象。这个时候如果有静态的方法或者变量，静态初始化的动作都会被执行。<strong>静态初始化在程序运行过程中只会在Class对象首次加载的时候运行一次，这些资源都会放在JVM的方法区</strong>。</p>
-<p>方法区又叫静态区，和堆一样，被所有的线程共享。</p>
-<p>方法区包含的都是在整个程序中永远唯一的元素，包含所有的class和static变量</p>
-<h4 id="初始化对象Dog-dog-new-Dog"><a href="#初始化对象Dog-dog-new-Dog" class="headerlink" title="初始化对象Dog dog = new Dog()"></a>初始化对象Dog dog = new Dog()</h4><ul>
-<li>第一次创建Dog对象先执行上面的一二步</li>
-<li>在堆上为Dog对象分配足够的存储空间，所有属性和方法都被设置成默认值(数字为0，字符为null，布尔为false，而所有引用被设置成null)</li>
-<li>执行构造函数时检查是否有父类，如果有父类就会先调用父类的构造函数，这里假设Dog没有父类，执行默认值字段的赋值即方法的初始化动作</li>
-<li>执行构造函数</li>
-</ul>
-<hr>
-<h4 id="有父类情况下的初始化"><a href="#有父类情况下的初始化" class="headerlink" title="有父类情况下的初始化"></a>有父类情况下的初始化</h4><p>假设Dog extends Animal</p>
-<ol>
-<li><p>执行第一步，找出Dog.class文件，接着在加载过程中会发现他有一个基类，于是先执行Animal类的第一二步，加载其静态方法和变量，加载结束之后再加载子类Dog的静态方法和变量。</p>
-<p>如果Animal类还有父类就继续类推，最终的基类叫做根基类</p>
-<p><strong>因为子类的static初始化可能会依赖父类的静态资源，所以要先加载父类的静态资源。</strong></p>
-</li>
-<li><p>接着new Dog对象，先为Dog对象分配存储空间-&gt;到Dog的构造函数-&gt;创建默认的属性。这里其构造函数中有一个隐含的super()，即父类构造函数，所以这时候会跳转到父类Animal的构造函数。</p>
-<p>Java会帮我们完成构造函数的补充，Dog实际隐式的构造函数如下</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Dog()&#123;</span><br><span class="line">	<span class="comment">//创建默认的属性和方法</span></span><br><span class="line">	<span class="comment">//调用父类的构造函数super()(可显式写出)</span></span><br><span class="line">	<span class="comment">//对默认属性和方法分别进行赋值和初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>父类Animal执行构造函数之前也是先分配存储空间-&gt;到其的构造函数-&gt;创建默认的属性，接着发现自己已经没有父类了，这时就给它的默认的属性赋值和方法的初始化</p>
-</li>
-<li><p>接着执行构造函数余下的部分，结束后跳转到子类Dog的构造函数。</p>
-</li>
-<li><p>子类Dog对默认属性和方法分别进行赋值和初始化，接着完成构造函数接下来的部分</p>
-</li>
-</ol>
-<h5 id="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"><a href="#为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？" class="headerlink" title="为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？"></a>为什么要执行父类的构造方法后才能继续子类的属性及方法赋值？</h5><p>因为子类的非静态变量和方法的初始化有可能使用到其父类的属性或方法，所以子类构造默认的属性的方法之后不应该进行赋值，而要跳转到父类的构造方法完成父类对象的构造之后，才来队自己的属性和方法进行初始化。</p>
-<p>因此子类的构造函数显示调用父类构造函数super()时要强制写在第一行的原因，程序需要跳转到父类构造函数完成父类对象的构造之后才能执行子类构造函数的余下部分。</p>
-<h5 id="为什么对属性和方法初始化之后再执行构造函数的其他部分？"><a href="#为什么对属性和方法初始化之后再执行构造函数的其他部分？" class="headerlink" title="为什么对属性和方法初始化之后再执行构造函数的其他部分？"></a>为什么对属性和方法初始化之后再执行构造函数的其他部分？</h5><p>因为构造函数中的显式部分有可能使用到对象的属性和方法。</p>
-<h5 id="初始化块的执行顺序"><a href="#初始化块的执行顺序" class="headerlink" title="初始化块的执行顺序"></a>初始化块的执行顺序</h5><p>首先static初始化块是在构造函数之前执行的，而且只执行一次，即类首次加载时。</p>
-<p>初始化是在类加载的时候完成的，而构造方法是生成对象的，是在类加载之后完成的，所以先执行初始化块</p>
-<p>初始化块分为静态和非静态，静态初始化块是执行一次，无论new多少次，它只会执行一次。</p>
-<p>而非静态初始化块则不是这样，每次new都会执行，而执行顺序是先静态后非静态。</p>
-<p><strong>无论静态或者是非静态，它们的执行顺序都在构造方法之前执行</strong></p>
-<p>在你在父类方法的情况下：<strong>在执行完非静态块后立即执行其构造函数然后执行子类的非静态代码块然后执行子类的构造方法。</strong></p>
-<h3 id="二、类实例化"><a href="#二、类实例化" class="headerlink" title="二、类实例化"></a>二、类实例化</h3><h4 id="类实例化的时机"><a href="#类实例化的时机" class="headerlink" title="类实例化的时机"></a>类实例化的时机</h4><p>一般是使用new和反射的时候</p>
-<h4 id="类实例化的过程"><a href="#类实例化的过程" class="headerlink" title="类实例化的过程"></a>类实例化的过程</h4><ol>
-<li><p>前提：.class文件已被加载完毕(经过加载、解析和初始化)</p>
-</li>
-<li><p>系统赋初值：在堆内存中为xxx类及其父类中的非静态成员变量开辟空间，并赋系统默认初值(0，null，false)，因为成员变量有初值，函数才能使用。</p>
-<p>即使子类覆盖了父类成员变量，仍会给父类所有成员变量分配空间，此时子类中多了一个属性，分态性，空间储存，分别存储父类和子类的成员变量。</p>
-</li>
-<li><p>父类成员变量的显式初始化和构造代码块的初始化</p>
-<p>两者的执行顺序就是代码排列顺序(和静态变量显示初始化和静态构造代码块初始化一样)，但和前面静态一样，当构造代码块在前二成员变量声明在后时，构造代码块中只能赋值，不能访问。另外实际上两者都会被自动装入父类构造函数的最前面</p>
-</li>
-<li><p>父类构造函数执行</p>
-<p>Java强制要求Object对象之外的所有类的构造函数的第一条语句必须是超类构造函数的调用语句，以保证所创建实例的完整性。</p>
-</li>
-<li><p>成员变量的显式初始化和子类构造代码块的初始化</p>
-</li>
-<li><p>构造函数初始化</p>
-<p>每一个Java中的对象都至少会有一个构造函数，如果没有显式定义构造函数，那么JVM会自动生成一个默认无参的构造函数。在编译生成的字节码中，这些构造函数会被命名为<init>()方法。参数列表与Java语言书写的构造函数的参数列表相同。</p>
-</li>
-</ol>
-<h4 id="类的加载机制和实例化的区别"><a href="#类的加载机制和实例化的区别" class="headerlink" title="类的加载机制和实例化的区别"></a>类的加载机制和实例化的区别</h4><table>
-<thead>
-<tr>
-<th></th>
-<th>类的加载机制</th>
-<th>类的实例化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>是什么</td>
-<td>把类从.class文件加载到虚拟机，为实例化做准备</td>
-<td>创建一个类的实例(对象)的过程</td>
-</tr>
-<tr>
-<td>实例化的对象</td>
-<td>只有类变量按照程序代码被赋值（<clinit>()方法的执行）</td>
-<td>非静态变量的初始化，以及构造方法的执行（&lt;init()方法的执行）</td>
-</tr>
-<tr>
-<td>执行次数</td>
-<td>一个类只会执行1次</td>
-<td>一个类可执行多次</td>
-</tr>
-</tbody></table>
-]]></content>
-      <tags>
-        <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java中的锁</title>
-    <url>/2021/03/17/Java%E4%B8%AD%E7%9A%84%E9%94%81/</url>
-    <content><![CDATA[<h3 id="1-锁的-7-大分类"><a href="#1-锁的-7-大分类" class="headerlink" title="1.锁的 7 大分类"></a>1.锁的 7 大分类</h3><ul>
-<li>偏向锁/轻量级锁/重量级锁</li>
-<li>可重入锁/非可重入锁</li>
-<li>共享锁/独占锁</li>
-<li>公平锁/非公平锁</li>
-<li>悲观锁/乐观锁</li>
-<li>自旋锁/非自旋锁</li>
-<li>可中断锁/不可中断锁</li>
-</ul>
+    <title>Activity的四种启动模式</title>
+    <url>/2021/03/25/Activity%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p>Activity的启动模式可以在AndroidManifest.xml中，通过android:launchMode或者在Intent的Flag来设置实现。</p>
 <span id="more"></span>
 
-<h3 id="2-偏向锁-轻量级锁-重量级锁"><a href="#2-偏向锁-轻量级锁-重量级锁" class="headerlink" title="2.偏向锁/轻量级锁/重量级锁"></a>2.偏向锁/轻量级锁/重量级锁</h3><ul>
-<li><p>偏向锁<br>如果自始至终，对于这把锁都不存在竞争，那么其实就没必要上锁，只需要打个标记就行了，这就是偏向锁的思想。一个对象被初始化后，还没有任何线程来获取它的锁时，那么它就是可偏向的，当有第一个线程来访问它并尝试获取锁的时候，它就将这个线程记录下来，以后如果尝试获取锁的线程正是偏向锁的拥有者，就可以直接获得锁，开销很小，性能最好。</p>
+<h4 id="standard模式"><a href="#standard模式" class="headerlink" title="standard模式"></a>standard模式</h4><ul>
+<li><p>特点：Activity的默认启动模式</p>
+<p>每启动一个Activity就会在栈顶创建一个新的实例</p>
 </li>
-<li><p>轻量级锁<br>JVM 开发者发现在很多情况下，synchronized 中的代码是被多个线程交替执行的，而不是同时执行的，也就是说并不存在实际的竞争，或者是只有短时间的锁竞争，用 CAS 就可以解决，这种情况下，用完全互斥的重量级锁是没必要的。轻量级锁是指当锁原来是偏向锁的时候，被另一个线程访问，说明存在竞争，那么偏向锁就会升级为轻量级锁，线程会通过自旋的形式尝试获取锁，而不会陷入阻塞。</p>
-</li>
-<li><p>重量级锁<br>重量级锁是互斥锁，它是利用操作系统的同步机制实现的，所以开销相对比较大。当多个线程直接有实际竞争，且锁竞争时间长的时候，轻量级锁不能满足需求，锁就会膨胀为重量级锁。重量级锁会让其他申请却拿不到锁的线程进入阻塞状态。</p>
+<li><p>缺点：当Activity已经位于栈顶时，再次启动Activity时还需要创建一个新的实例，不能直接复用。</p>
 </li>
 </ul>
-<p>锁升级的路径：无锁→偏向锁→轻量级锁→重量级锁。</p>
-<h3 id="3-可重入锁-非可重入锁"><a href="#3-可重入锁-非可重入锁" class="headerlink" title="3.可重入锁/非可重入锁"></a>3.可重入锁/非可重入锁</h3><p>可重入锁指的是线程当前已经持有这把锁了，能在不释放这把锁的情况下，再次获取这把锁。不可重入锁指的是虽然线程当前持有了这把锁，但是如果想再次获取这把锁，也必须要先释放锁后才能再次尝试获取。</p>
-<h4 id="可重入锁作用和使用场景"><a href="#可重入锁作用和使用场景" class="headerlink" title="可重入锁作用和使用场景"></a>可重入锁作用和使用场景</h4><ol>
-<li>最大的作用是避免死锁</li>
-<li>当一个线程执行一个带锁的代码块或方法，同时代码块或方法里也获取了同一个锁。为了避免死锁此时就可以使用可重入锁。</li>
-</ol>
-<h3 id="4-共享锁-独占锁"><a href="#4-共享锁-独占锁" class="headerlink" title="4.共享锁/独占锁"></a>4.共享锁/独占锁</h3><p>共享锁指的是我们同一把锁可以被多个线程同时获得，而独占锁指的就是，这把锁只能同时被一个线程获得。读写锁中的读锁，是共享锁，而写锁是独占锁。读锁可以被同时读，可以同时被多个线程持有，而写锁最多只能同时被一个线程持有。</p>
-<h3 id="5-公平锁-非公平锁"><a href="#5-公平锁-非公平锁" class="headerlink" title="5.公平锁/非公平锁"></a>5.公平锁/非公平锁</h3><p>公平锁的公平的含义在于如果线程现在拿不到这把锁，那么线程就都会进入等待，开始排队，在等待队列里等待时间长的线程会优先拿到这把锁，。而非公平锁会在一定情况下忽略掉已经在排队的线程，发生插队现象</p>
-<h3 id="6-悲观锁-乐观锁"><a href="#6-悲观锁-乐观锁" class="headerlink" title="6.悲观锁/乐观锁"></a>6.悲观锁/乐观锁</h3><p>悲观锁会悲观的认为多个线程操作数据一定会产生问题，因此在获取资源之前必须先拿到锁。</p>
-<p>而乐观锁则恰恰相反，认为同一个数据的并发操作是不会发生修改的，因此在更新数据的时候会采用尝试更新，不断更新数据，乐观的认为不加锁的并发操作是没有问题的。</p>
-<h4 id="乐观锁的实现："><a href="#乐观锁的实现：" class="headerlink" title="乐观锁的实现："></a>乐观锁的实现：</h4><ol>
-<li><p>CAS：当多个线程尝试使用CAS同时更新一个变量时，只有其中一个线程能更新变量的值，而其他线程都会失败，失败的线程并不会挂起，而是被告知这次竞争中失败，并且可以再次尝试，CAS是一种非阻塞式的同步方式。</p>
-<p>CAS操作包含三个操作数——内存位置、预期原值和新值。如果内存位置的值与预期原值相匹配，那么处理器会自动将该位置更新为新值。否则不做任何操作。</p>
-<p><strong>乐观锁是一种思想，而CAS是这种思想的一种实现方式</strong></p>
-</li>
-<li><p>版本号控制：一般在数据表中加上一个数据版本号version字段，表示数据被修改的次数。当数据被修改时，version值会+1。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值与当前数据库中的version值相等才会更新数据，否则重试更新操作，直到更新成功</p>
-</li>
-</ol>
-<h3 id="7-自旋锁和非自旋锁"><a href="#7-自旋锁和非自旋锁" class="headerlink" title="7.自旋锁和非自旋锁"></a>7.自旋锁和非自旋锁</h3><p>自旋锁的理念是如果线程现在拿不到锁，并不直接陷入阻塞或者释放CPU资源，而是开始利用循环，不停尝试获取锁，这个循环过程被称为“自旋”。相反，非自旋锁就是没有自旋的过程，如果拿不到锁就直接放弃或者进行其他的逻辑处理。</p>
-<h3 id="8-可中断锁-不可中断锁"><a href="#8-可中断锁-不可中断锁" class="headerlink" title="8.可中断锁/不可中断锁"></a>8.可中断锁/不可中断锁</h3><p>在Java中，synchronized关键字修饰的锁代表的是不可中断锁，一旦线程申请了锁，就只能等待拿到锁之后才能进行其他的逻辑处理，而ReentrantLock就是一种可中断锁，在获取锁的过程中突然不想获取了也可以在中断之后去做其他的事情，并不需要一直等到获取到锁才离开。</p>
+<h4 id="singleTop-栈顶复用-模式"><a href="#singleTop-栈顶复用-模式" class="headerlink" title="singleTop(栈顶复用)模式"></a>singleTop(栈顶复用)模式</h4><ul>
+<li>特点：该模式会判断要启动的Activity实例是否位于栈顶，如果位于栈顶则直接复用，调用其onNewIntent()方法，否则创建新的实例。</li>
+<li>缺点：如果Activity并未处于栈顶位置，则还是可能会创建多个实例。</li>
+</ul>
+<h4 id="singleTask-栈内复用-模式"><a href="#singleTask-栈内复用-模式" class="headerlink" title="singleTask(栈内复用)模式"></a>singleTask(栈内复用)模式</h4><ul>
+<li>特点：Activity只会在任务栈里存在一个实例。如果要激活的Activity在任务栈里已经存在，就不会创建新的Activity，而是直接复用这个已经存在的Activity，调用其onNewIntent()方法，并且清空这个Activity任务栈上的所有Activity。</li>
+</ul>
+<h4 id="singleInstance-单一实例-模式"><a href="#singleInstance-单一实例-模式" class="headerlink" title="singleInstance(单一实例)模式"></a>singleInstance(单一实例)模式</h4><ul>
+<li>特点：整个手机操作系统中只有它一个实例存在，该模式的Activity会启动一个新的任务栈来管理Activity实例。无论从哪个任务栈中启动该Activity，都会是该Activity所在的任务栈转移到前台，从而使Activity显示。主要的作用是为了在不同程序中共享一个Activity实例。</li>
+</ul>
 ]]></content>
       <tags>
-        <tag>Java基础</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
-    <title>HTTP请求报文</title>
-    <url>/2021/03/17/HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%88%E8%AF%B7%E6%B1%82%E8%A1%8C%E3%80%81%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93%EF%BC%89/</url>
-    <content><![CDATA[<p>HTTP请求报文由三部分组成：请求行、请求头和请求体</p>
+    <title>Activity、Service和Fragment的生命周期</title>
+    <url>/2021/03/25/Activity%E3%80%81Service%E5%92%8CFragment%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<h3 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h3><p>Activity实例是由系统自动创建，并在不同的状态期间回调相应的方法。一个最简单的完整的Activity生命周期会按照如下顺序回调：onCreate -&gt; onStart -&gt; onResume -&gt; onPause -&gt; onStop -&gt; onDestroy。</p>
+<span id="more"></span>
+
+<p>如下图所示：<img src="http://ailianblog.oss-cn-shenzhen.aliyuncs.com/activity/blog_activity_01.png" alt="image"></p>
+<p><strong>未完成，施工中</strong></p>
+]]></content>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北京风行面试记录</title>
+    <url>/2021/03/25/%E5%8C%97%E4%BA%AC%E9%A3%8E%E8%A1%8C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>北京风行技术面面试记录</p>
 <span id="more"></span>
 
 <ol>
-<li>请求行：包含请求方法，请求的URI和HTTP版本</li>
-<li>状态行：包含响应结果的状态码</li>
-<li>首部字段：包含请求和响应的各种条件、属性的各类首部</li>
-<li>其他：包含未定义的首部比如cookie等</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP与HTTPS</title>
-    <url>/2021/03/16/HTTP%E4%B8%8EHTTPS/</url>
-    <content><![CDATA[<h3 id="一、HTTP和HTTPS的基本概念"><a href="#一、HTTP和HTTPS的基本概念" class="headerlink" title="一、HTTP和HTTPS的基本概念"></a>一、HTTP和HTTPS的基本概念</h3><p>HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器请求和应答的标准(TCP)，用于从Web服务器传输超文本到本地浏览器的传输协议。</p>
-<p>HTTPS：是以安全为目标的HTTP通道，即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。HTTP开发的主要目的是提供对网站服务器的身份认证，保护交换数据的隐私和完整性</p>
-<span id="more"></span>
-
-<h3 id="二、HTTP的工作原理"><a href="#二、HTTP的工作原理" class="headerlink" title="二、HTTP的工作原理"></a>二、HTTP的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130120012190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>客户端与服务器建立TCP连接(三次握手)</li>
-<li>连接成功后，客户端发送请求给服务器</li>
-<li>服务器接收到客户端发送的消息后作出响应，并将响应信息发给客户端</li>
-<li>服务器发送玩响应信息后，就会断开TCP连接，因此HTTP是无状态的，下一次访问的时候不知道之前访问的过程</li>
-<li>客户端收到响应信息，浏览器开始解析，将HTML文档解析后呈现在浏览器上</li>
-</ol>
-<h3 id="三、HTTPS的工作原理"><a href="#三、HTTPS的工作原理" class="headerlink" title="三、HTTPS的工作原理"></a>三、HTTPS的工作原理</h3><p><img src="https://img-blog.csdnimg.cn/20210130113922972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lzZm9yX3lvdQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li><p>客户端发起HTTPS请求</p>
-<p>用户在浏览器中输入一个HTTPS网址，连接到server的443端口</p>
-</li>
-<li><p>传送证书</p>
-<p>采用HTTPS协议的服务器必须要有一套数字证书，这套证书其实就是一对公钥和私钥。</p>
-<p>服务器将证书发送给客户端，这个证书其实就是公钥，只是包含了很多信息，比如证书的颁发机构，过期时间等</p>
-</li>
-<li><p>客户端解析证书</p>
-<p>这部分工作是由客户端的TLS完成的，首先会验证公钥是否有效，如果发现异常就会弹出一个警告，提示证书存在问题</p>
-</li>
-<li><p>生成随机秘钥</p>
-<p>如果证书没有问题，那就生成一个随机对称秘钥</p>
-</li>
-<li><p>加密对称秘钥</p>
-<p>公钥对该对称秘钥进行加密。</p>
-</li>
-<li><p>传送加密信息</p>
-<p>将加密后的对称秘钥发送给服务器，目的是让服务端得到对称秘钥，这样以后客户端和服务端的通信就可以通过这个对称秘钥进行加密和解密了。</p>
-</li>
-<li><p>服务端解密信息</p>
-<p>服务端用私钥解密后便得到客户端传过来的对称秘钥，然后把内容通过该秘钥进行对称加密</p>
-<p>所谓对称加密就是将信息和对称秘钥通过算法混合在一起，这样除非知道对称秘钥，不然无法获取内容。</p>
-</li>
-<li><p>传输加密后的信息</p>
-<p>这部分信息是服务器用对称秘钥加密后的信息，可以在客户端被还原</p>
-</li>
-<li><p>客户端解密信息</p>
-<p>客户端用之前生成的对称秘钥解密服务端传过来的信息，获取内容。</p>
-</li>
-</ol>
-<h3 id="四、HTTP和HTTPS的区别"><a href="#四、HTTP和HTTPS的区别" class="headerlink" title="四、HTTP和HTTPS的区别"></a>四、HTTP和HTTPS的区别</h3><ol>
-<li>HTTPS协议需要到CA申请证书，一般免费证书较少，因而需要一定费用</li>
-<li>HTTP是超文本传输协议，信息是明文传输的，数据是不加密的，而HTTPS则是具有安全性的SSL加密传输协议。</li>
-<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，HTTP是80端口而HTTPS是443端口</li>
-<li>HTTP的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比HTTP协议要安全</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
-        <tag>重点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高频考点：ArrayList和LinkedList</title>
-    <url>/2021/03/16/%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%9AArrayList%E5%92%8CLinkedList/</url>
-    <content><![CDATA[<h3 id="ArrayList和LinkedList的主要区别"><a href="#ArrayList和LinkedList的主要区别" class="headerlink" title="ArrayList和LinkedList的主要区别"></a>ArrayList和LinkedList的主要区别</h3><span id="more"></span>
-
-<p>1.LinkedList和ArrayList的差别主要来源于其二者的数据结构不同。<strong>ArrayList是基于动态数组实现的</strong>，<strong>LinkedList是基于双链表实现的</strong>。另外LinkedList类可以根据索引来随机访问集合中的元素，还实现了Deque接口，Deque接口是Queue接口的子接口，代表了一个双向队列，因此LinkedList可以作为双向队列、栈和List集合使用</p>
-<p>2.因为Array是基于索引的数据结构，它使用索引在数组中搜索和读取数据时很快的，可以直接返回数组中index位置的元素，因此在随机访问集合元素上有较好的性能。Array获取数据的时间复杂度是O(1)，<strong>但是要插入、删除数据时开销会很大，因为需要移动数组中插入/删除位置之后的所有元素</strong>。</p>
-<p>3.相对于ArrayList，<strong>LinkedList的随机访问集合元素时性能较差，因为需要在双向链表中找到index的位置再返回</strong>；但在进行插入、删除操作时比前者要快，因为LinkedList不像ArrayList，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组中。</p>
-<p>4.LinkedList相较于ArrayList需要更多的内存，因为ArrayList的每个索引的位置都是实际的数据，而LinkedList中的每个节点存储的实际上是数据和前后节点的位置</p>
-<h3 id="两者的使用场景"><a href="#两者的使用场景" class="headerlink" title="两者的使用场景"></a>两者的使用场景</h3><p>当应用队数据有较多的随机访问时，ArrayList要优于LinkedList</p>
-<p>如果应用有更多的插入或者删除操作，随机访问较少，LinkedList要优于ArrayList。</p>
-]]></content>
-      <tags>
-        <tag>Java基础</tag>
-        <tag>数据结构</tag>
-        <tag>重点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从输入URL到网页呈现的过程</title>
-    <url>/2021/03/15/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E7%BD%91%E9%A1%B5%E5%91%88%E7%8E%B0%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<ul>
-<li>1、输入网址</li>
-<li>2、DNS解析</li>
-<li>3、建立tcp连接</li>
-<li>4、客户端发送HTPP请求</li>
-<li>5、服务器处理请求</li>
-<li>6、服务器响应请求</li>
-<li>7、浏览器展示HTML</li>
-<li>8、浏览器发送请求获取其他在HTML中的资源。</li>
-</ul>
-<span id="more"></span>
-
-<h4 id="1-域名解析"><a href="#1-域名解析" class="headerlink" title="1.域名解析"></a>1.域名解析</h4><p>当我们在浏览器中输入一个URL的时候首先需要解析为IP地址，这一过程叫做DNS解析</p>
-<p>DNS解析是一个递归查询的过程，例如我们解析“<a href="http://www.baidu.com”/">www.baidu.com”</a>    时过程是这样的：</p>
-<ul>
-<li>在本地域名服务器中查询IP地址，未找到域名</li>
-<li>本地域名服务器向根域名服务器发送请求，未找到域名</li>
-<li>本地服务器向.com顶级域名服务器发送请求，未找到域名</li>
-<li>本地域名服务器向.baidu.com域名服务器发送请求，找到该域名，并将对应的IP返回给本地域名服务器</li>
-</ul>
-<h4 id="2-TCP连接"><a href="#2-TCP连接" class="headerlink" title="2.TCP连接"></a>2.TCP连接</h4><p>HTTP协议是使用TCP协议作为其传输层协议的，在拿到服务器的IP地址后，浏览器客户端会与服务器建立TCP连接，该过程包括<a href="https://3xiaoxiao3.github.io/2021/03/14/TCP%E5%92%8CUDP/#more">三次握手</a> </p>
-<h4 id="3-浏览器发送HTTP请求"><a href="#3-浏览器发送HTTP请求" class="headerlink" title="3.浏览器发送HTTP请求"></a>3.浏览器发送HTTP请求</h4><p>浏览器构建http请求报文，并通过TCP协议传送到服务器的指定端口，http请求报文一共包括三个部分：</p>
-<ul>
-<li>请求行：指定http请求的方法、url、http协议版本等</li>
-<li>请求头：描述浏览器的相关信息，语言、编码等</li>
-<li>请求正文：当发送POST、PUT等请求时，通常需要向服务器传递数据。这些数据就储存在请求正文中。</li>
-</ul>
-<h4 id="4-服务器处理HTTP请求"><a href="#4-服务器处理HTTP请求" class="headerlink" title="4.服务器处理HTTP请求"></a>4.服务器处理HTTP请求</h4><p>服务器处理HTTP请求，并返回响应报文。响应报文包括三个部分：</p>
-<ul>
-<li>状态码：http服务常用的状态码及其含义如下</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="left">分类</th>
-<th align="left">分类描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1**</td>
-<td align="left">信息，服务器收到请求，需要请求者继续执行操作</td>
-</tr>
-<tr>
-<td align="left">2**</td>
-<td align="left">成功，操作被成功接收并处理</td>
-</tr>
-<tr>
-<td align="left">3**</td>
-<td align="left">重定向，需要进一步的操作以完成请求</td>
-</tr>
-<tr>
-<td align="left">4**</td>
-<td align="left">客户端错误，请求包含语法错误或无法完成请求</td>
-</tr>
-<tr>
-<td align="left">5**</td>
-<td align="left">服务器错误，服务器在处理请求的过程中发生了错误</td>
-</tr>
-</tbody></table>
-<ul>
-<li>响应头：包含了响应的相关信息，如日期等。</li>
-<li>响应正文：服务器返回给浏览器的文本信息，通常的 html、js、css、图片等就在这部分里。</li>
-</ul>
-<h4 id="5-浏览器页面渲染"><a href="#5-浏览器页面渲染" class="headerlink" title="5.浏览器页面渲染"></a>5.浏览器页面渲染</h4><p>浏览器接收到http服务器发送过来的响应报文，并开始解析HTML文档，渲染页面。具体的渲染过程包括：构建DOM树、构建渲染树、定位页面元素、绘制页面元素等</p>
-<h4 id="6-断开TCP连接"><a href="#6-断开TCP连接" class="headerlink" title="6.断开TCP连接"></a>6.断开TCP连接</h4><p>客户端与服务器四次挥手，断开TCP连接</p>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCP和UDP</title>
-    <url>/2021/03/14/TCP%E5%92%8CUDP/</url>
-    <content><![CDATA[<h4 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h4><span id="more"></span>
-
-<ul>
-<li>TCP是面向连接的，UDP是面向无连接的。</li>
-<li>UDP程序结构较为简单。</li>
-<li>TCP是面向字节流的，UDP是基于数据报的。</li>
-<li>TCP保证数据正确性，UDP可能丢包。</li>
-<li>TCP保证数据顺序，UDP不保证</li>
-</ul>
-<h4 id="什么是UDP"><a href="#什么是UDP" class="headerlink" title="什么是UDP"></a>什么是UDP</h4><p>UDP的包头：</p>
-<p><img src="https://static001.geekbang.org/resource/image/6d/bf/6d1313f51b9dfd7ab454b2cef1cb37bf.jpg" alt="UDP 包头"></p>
-<ul>
-<li>两个十六位的端口号，分别为源端口和目标端口。</li>
-<li>整个数据报文的长度。</li>
-<li>整个数据报文的校验和，该字段用于发现头部信息和数据中的错误。</li>
-</ul>
-<h5 id="UDP的特点"><a href="#UDP的特点" class="headerlink" title="UDP的特点"></a>UDP的特点</h5><ul>
-<li>沟通简单，不需要大量的数据结构、处理逻辑和包头字段</li>
-<li>不会建立连接，但是会监听这个地方，谁都可以传给它数据，它也可以传给任何人数据，甚至可以同时传给多个人。</li>
-<li>不会根据网络的情况进行拥塞控制，无论是否丢包都会一直发送</li>
-</ul>
-<p>因此UDP在传输报文时是很高效的</p>
-<h4 id="什么是TCP"><a href="#什么是TCP" class="headerlink" title="什么是TCP"></a>什么是TCP</h4><p>TCP的包头格式：</p>
-<p><img src="https://static001.geekbang.org/resource/image/a7/bf/a795461effcce686a43f48e094c9adbf.jpg" alt="TCP 包头"></p>
-<ul>
-<li>首先是源端口和目标端口</li>
-<li>接下来是包的序号，主要为了解决乱序问题</li>
-<li>确认序号，发出去的包应该有确认，这样能知道对方是否收到，如果没收到就应该重新发送，解决丢包的问题</li>
-<li>状态位。SYN是发起一个链接，ACK是回复，RST是重新连接，FIN是结束连接。因为TCP是面向连接的，因此需要双方维护连接的状态，这些状态位的包会引起双方的状态变更。</li>
-<li>窗口大小，TCP要做流量控制，需要通信双方各声明一个窗口，标记自己当前的处理能力</li>
-</ul>
-<h5 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h5><ol>
-<li><p>主机A通过向主机B发送一个含有同步序列号标志位的数据段（SYN）给主机B，向主机B请求建立连接，通过这个数据段，主机A告诉主机B两件事：我想要和你通信；你可以用哪个序列号作为起始数据段来回应我。</p>
-</li>
-<li><p>主机B收到主机A的请求后，用一个带有确认应答(ACK)和同步序列号(SYN)标志位的数据段响应主机A，也告诉主机A两件事：我已经收到你的请求了，你可以传输数据了；你要用哪个序列号作为起始数据段来回应我。</p>
-</li>
-<li><p>主机A收到这个数据段后，再发送一个确认应答，确认已收到主机B的数据段</p>
-<p>这样三次握手就完成了，主机AB就可以传输数据了</p>
-</li>
-</ol>
-<h5 id="TCP的四次挥手"><a href="#TCP的四次挥手" class="headerlink" title="TCP的四次挥手"></a>TCP的四次挥手</h5><ol>
-<li>当主机A完成数据传输后，将控制位FIN置为1，提出停止TCP连接的请求</li>
-<li>主机B收到FIN后对其作出响应，确认这一方向的TCP连接将关闭，将ACK置为1</li>
-<li>由主机B端再提出反方向的关闭请求，将FIN置为1</li>
-<li>主机A对主机B的请求进行确认，将ACK置为1，双方向的关闭结束</li>
-</ol>
-<h4 id="TCP的三次握手目的是什么？为什么不用两次和四次？"><a href="#TCP的三次握手目的是什么？为什么不用两次和四次？" class="headerlink" title="TCP的三次握手目的是什么？为什么不用两次和四次？"></a>TCP的三次握手目的是什么？为什么不用两次和四次？</h4><p><strong>TCP 三次握手的主要目的是防止失效的连接请求报文被服务端接受</strong></p>
-<p>  如果只有两次握手，假设当客户端发送第一次连接请求由于网络拥塞的原因，迟迟未到服务端，客户端没接收到确认报文，认为服务端没有收到，于是重新发送请求报文并与服务端建立连接，等这次连接断开了，之前滞留的那个请求报文又到达了服务端，就会让服务端与客户端再次连接成功，这时服务端就会一直等待客户端发送请求，造成了资源的浪费。</p>
-<p>  两次握手只能保证单向链路是可以通信的，理论上来说，要保证双向链路可以通信需要四次握手，但实际上服务端给客户端的 SYN 和 ACK 数据包可以合为一次握手，所以实际上只需要三次握手即可。</p>
-<h4 id="挥手为什么需要四次？三次不行吗？"><a href="#挥手为什么需要四次？三次不行吗？" class="headerlink" title="挥手为什么需要四次？三次不行吗？"></a>挥手为什么需要四次？三次不行吗？</h4><p>挥手阶段中服务端的 ACK 和 FIN 数据包不能合为一次。因为挥手阶段的流程为客户端发送FIN数据包表示自己发完了，服务端立即回复 ACK 数据包表示自己知道了，此时客户端到服务端的连接已经释放了，客户端不会再发送数据了，但服务端还可以继续向客户端发送数据，等到服务端也完成了数据发送，才会发送 FIN，这时客户端回复 ACK，就可以结束通信了。</p>
-<h4 id="TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？"><a href="#TCP-在四次挥手的过程中为什么客户端最后还要等待-2MSL-Maximum-Segment-Lifetime-？" class="headerlink" title="TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？"></a>TCP 在四次挥手的过程中为什么客户端最后还要等待 2MSL(Maximum Segment Lifetime)？</h4><p>因为客户端要保证他的 ACK 包顺利到达服务端，如果客户端的ACK数据包丢失，则服务端或重新发送 FIN 包到客户端，而这两个过程的最长时间为 1MSL，加起来为 2MSL，如果 2MSL 后客户端还没有收到服务端重发的 FIN 包，则说明 ACK 包顺利到达，可以关闭连接了。</p>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面向对象和面向过程</title>
-    <url>/2021/03/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="什么是面向对象？什么又是面向过程"><a href="#什么是面向对象？什么又是面向过程" class="headerlink" title="什么是面向对象？什么又是面向过程"></a>什么是面向对象？什么又是面向过程</h3><span id="more"></span>
-
-<h4 id="面向对象：——行为化"><a href="#面向对象：——行为化" class="headerlink" title="面向对象：——行为化"></a>面向对象：——行为化</h4><p>面向对象就是把整个需求按照特点、功能划分，将这些存在共性的部分封装成类，创建了对象不是为了完成某一步骤，而是描述某个事物在解决问题的步骤中的行为</p>
-<h5 id="面向对象的三个基本特征"><a href="#面向对象的三个基本特征" class="headerlink" title="面向对象的三个基本特征"></a>面向对象的三个基本特征</h5><p>——封装、多态、继承</p>
-<ol>
-<li><h6 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h6><p>封装，也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行隐藏。</p>
-</li>
-<li><h6 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h6><p>继承是指一种能力：它可以使用现有的类的所有功能，并且在无需重新编写原来类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或者是“派生类”，被继承的类称为“基类”、“父类”或者“超类”。</p>
-</li>
-<li><h6 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h6><p>多态性是允许你将父对象设置成为和一个或者更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给他的子对象的特性以及不同的方式运作。</p>
-<p>一句话理解：允许将子类类型的指针赋值给父类类型的指针。</p>
-<p>实现多态有两种方式：覆盖和重载，两种方式的区别在于：<strong>覆盖在运行时决定，重载是在编译时决定，而且覆盖和重载的机制不同。</strong>例如在Java中，重载方法的签名必须不同于原来方法的，但是对于覆盖签名必须相同。</p>
-</li>
-</ol>
-<h4 id="面向过程——步骤化"><a href="#面向过程——步骤化" class="headerlink" title="面向过程——步骤化"></a>面向过程——步骤化</h4><p>面向过程就是分析出实现需求所需要的步骤，通过函数（方法）一步步实现这些步骤，接着依次调用即可。</p>
-<h3 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h3><p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
-<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
-]]></content>
-      <tags>
-        <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多益网络面试记录</title>
-    <url>/2021/03/12/%E5%A4%9A%E7%9B%8A%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>多益网络一面面试问题记录</p>
-<span id="more"></span>
-
-<ol>
-<li><p>什么是面向对象？面向对象和面向过程有什么区别？</p>
-<p>面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了。</p>
-<p>面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。</p>
-</li>
-<li><p>ArrayList和LinkedList有什么区别？</p>
-<p>ArrayList是Array(动态数组)的数据结构，LinkedList是Link(链表)的数据结构。</p>
-<p>当随机访问List（get和set操作）时，ArrayList比LinkedList的效率更高，因为LinkedList是线性的数据存储方式，所以需要移动指针从前往后依次查找。</p>
-<p>当对数据进行增加和删除的操作(add和remove操作)时，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
-<p>ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
-<p>ArrayList主要控件开销在于需要在lList列表预留一定空间；而LinkList主要控件开销在于需要存储结点信息以及结点指针信息。</p>
-</li>
-<li><p>链表和数组有什么区别？在什么时候应该使用链表/数组？</p>
-<p>数组便于查询，链表便于插入删除。数组节省空间但是长度固定，链表虽然变长但是占了更多的存储空间。</p>
-</li>
-<li><p>HashMap的实现方式，HashMap的底层数据结构是什么？</p>
-<p>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。</p>
-<p>HashMap的底层数据结构是数组+链表</p>
-<p>当链表长度大于等于8时会转换为红黑树</p>
-</li>
-<li><p>算法题：<a href="https://leetcode-cn.com/problems/linked-list-cycle/">Leetcode 141.环形链表</a> 如何判断一个链表是否有环？</p>
-<p>快慢指针解决，时间复杂度为O(n)</p>
-</li>
-<li><p>什么是线程不安全？Java要实现线程安全可以用哪些关键字？</p>
-<p>是指不提供加锁机制保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据。</p>
-<p>实现线程安全可以用Lock和synchronized</p>
-</li>
-<li><p>算法题：<a href="https://leetcode-cn.com/problems/permutations/">Leetcode 46.全排列</a> 给定一个值n，输出1-n数字的全排列</p>
-<p>回溯算法解决，时间复杂度：O*(<em>n</em>×*n!)，其中 n为序列的长度</p>
-</li>
-<li><p>数据库事物的四个基本特性是什么？</p>
-<ul>
-<li>原子性：即不可分割性，事务要么全部被执行，要么就全部不执行。</li>
-<li>一致性：事务的执行使得数据库以一种正确的状态转换成另一种正确状态。</li>
-<li>隔离性：在事务提交之前，不允许把该事务对数据的任何改变提供给任何其他事务。</li>
-<li>持久性：事务正确提交之后，其结果将永久保存在数据库中，即使事务提交后有了其他故障，事务的处理结果也会得到保存。</li>
-</ul>
-</li>
+<li>Android四大组件是什么</li>
+<li>Activity的生命周期</li>
+<li>Activity的四种启动模式</li>
+<li>Service的两种启动方式以及他们的区别</li>
+<li>除了原生Android使用Java开发还有没有了解过Android的其他开发方式</li>
+<li>StringBuffer和StringBuilder的区别</li>
+<li>Android开发中有没有使用到什么第三方库</li>
+<li>什么是线程安全，用什么关键字可以保证线程安全</li>
+<li>讲一下Android的事件分发机制</li>
+<li>讲一下Java的垃圾回收机制</li>
+<li>Android中View的绘制过程</li>
+<li>有没有了解过Android Framework</li>
 </ol>
 ]]></content>
       <tags>
         <tag>面试记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql事务的隔离级别</title>
+    <url>/2021/03/25/Mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
+    <content><![CDATA[<p>Mysql中InnoDB支持四种事务隔离级别</p>
+<ol>
+<li>read uncommited：读到未提交数据</li>
+<li>read committed：不可重复读</li>
+<li>repeatable read：可重读、读提交</li>
+<li>serializable：串行事务</li>
+</ol>
+<span id="more"></span>
+
+<p>mysql默认设置的隔离级别是repeatable read(可重复读)</p>
+<h4 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h4><p>MYSQL事务隔离是依靠锁来实现的，而未读提交是不加锁的，所以性能是最好的。</p>
+<p>任何事务队数据的修改都会第一时间暴露给其他的事务，即使事务还没有提交。</p>
+<p>读未提交，其实就是可以读到其他事务未提交的数据，但没有保证你读到的数据最终一定是提交之后的数据，如果中间发生回滚，那就回出现脏数据的问题。</p>
+<h4 id="可重读"><a href="#可重读" class="headerlink" title="可重读"></a>可重读</h4><p>可重读指的是在一个事务内，最开始读到了数据和事务结束前的任意时刻读到的同一批数据都是一致的。也就是事务不会读到其他事务对已有数据的修改，即使其他事务已经提交。但是，对于其他事务新插入的数据时可以读到的，这也就引发了幻读的问题。</p>
+<h4 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h4><p>对比可重复读，不可重复读指的是在同一事务内，不同的时刻读到的同一数据可能是不一样的，可能会受到其他事务的影响，比如其他事务改了这批数据并提交了。也就一个事务只能读到其他事务已经提交过的数据，也就是其他事务调用了commit命令之后的数据。</p>
+<h4 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h4><p>串行化是四种事务隔离级别中效果最好的，它将事务变为顺序执行，与其他的三个隔离级别相比，它就相当于单线程 ，后一个事务必须等待前一个事务结束</p>
+]]></content>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql索引</title>
+    <url>/2021/03/25/Mysql%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<h4 id="索引的目的是什么"><a href="#索引的目的是什么" class="headerlink" title="索引的目的是什么"></a>索引的目的是什么</h4><ul>
+<li>快速访问表中的特定信息，提高检索速度</li>
+<li>创建唯一性索引，保证数据库表中每一行数据的唯一性</li>
+<li>加速表与表之间的连接</li>
+<li>使用分组和排序字句进行数据检索时，可以显著减少查询分组和排序的时间</li>
+</ul>
+<h4 id="索引队数据库系统的负面影响"><a href="#索引队数据库系统的负面影响" class="headerlink" title="索引队数据库系统的负面影响"></a>索引队数据库系统的负面影响</h4><ul>
+<li>创建和维护索引需要耗费时间，这个时间随着数据量的增加而增加</li>
+<li>索引需要占用物理空间，不光是表需要占用数据空间，每个索引也都需要占用物理空间。</li>
+<li>当对表进行增删改的时候索引也需要动态维护，这就降低了数据的维护速度</li>
+</ul>
+<h4 id="为数据表简历索引的原则"><a href="#为数据表简历索引的原则" class="headerlink" title="为数据表简历索引的原则"></a>为数据表简历索引的原则</h4><ul>
+<li>在最频繁使用的、用以缩小查询范围的字段上建立索引</li>
+<li>在频繁使用的、需要排序的字段上建立索引</li>
+</ul>
+<h4 id="什么情况下不宜建立索引"><a href="#什么情况下不宜建立索引" class="headerlink" title="什么情况下不宜建立索引"></a>什么情况下不宜建立索引</h4><ul>
+<li>查询中很少涉及的列或者是重复值比较多的列</li>
+<li>对于一些特殊的数据类型，比如text等</li>
+</ul>
+<h4 id="数据库索引中为什么使用B-树而不是其他的树形结构"><a href="#数据库索引中为什么使用B-树而不是其他的树形结构" class="headerlink" title="数据库索引中为什么使用B+树而不是其他的树形结构"></a>数据库索引中为什么使用B+树而不是其他的树形结构</h4><p>因为B树不管是叶子节点还是非叶子节点，都会保存数据，导致在非叶子节点中能保存的指针数量变少。</p>
+<p>指针少的情况下要保存大量的数据，只能增加树的高度，导致IO操作变多，查询性能变低。</p>
+]]></content>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java的反射机制</title>
+    <url>/2021/03/26/Java%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h4 id="什么是反射机制"><a href="#什么是反射机制" class="headerlink" title="什么是反射机制"></a>什么是反射机制</h4><p>简单来说，反射机制就是程序在运行时能获取到自身的信息。在Java中，只要给定类的名字，那么就能通过反射机制来获得类的所有信息</p>
+<span id="more"></span>
+
+<h4 id="Java反射机制的作用"><a href="#Java反射机制的作用" class="headerlink" title="Java反射机制的作用"></a>Java反射机制的作用</h4><ol>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法</li>
+<li>在运行时任意调用一个对象的方法</li>
+<li>在运行时构造任意一个类的对象</li>
+</ol>
+<h4 id="反射机制的优缺点"><a href="#反射机制的优缺点" class="headerlink" title="反射机制的优缺点"></a>反射机制的优缺点</h4><h5 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h5><ul>
+<li>静态编译：在编译时即确定类型，绑定对象，即通过</li>
+<li>动态编译：运行时确定类型，绑定对象。动态编译最大限度的发挥了Java的灵活性，体现了多态的应用，有利于降低类之间的耦合性</li>
+</ul>
+<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>对性能有一定影响，使用反射基本上是一种解释操作，我们可以告诉JVM，我们希望做什么并且它满足我们的要求。这类操作总是慢于直接执行相同的操作。</p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java的四大基本特性</title>
+    <url>/2021/03/26/Java%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p>Java的四个基本特性：抽象、封装、继承、多态</p>
+<span id="more"></span>
+
+<h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><p>指将一类对象的共同特征总结出来构造类的过程，主要包括数据抽象和行为抽象两个方面，分别对应于类的属性和方法，抽象只关注对象有哪些属性和行为，并不关注这些行为的细节是什么。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装就是将类的某些属性隐藏起来，然后通过接口对外开放，但是在外部不能直接进行查找属性。</p>
+<p>封装有以下几个优点：</p>
+<ol>
+<li>便于使用者正确、方便的使用系统，防止使用者错误修改系统属性</li>
+<li>有助于建立各个系统间的松耦合关系</li>
+<li>提高了软件的可重用性</li>
+<li>降低了大型系统的风险，即使整个系统不成功，个别独立的子系统可能还有价值</li>
+</ol>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>子类继承父类的非private属性和方法</p>
+<p>子类除了拥有从父类继承过来的属性和方法外，子类还可以有自己的属性和方法</p>
+<p>java中只支持单一继承，也就是一个子类只能有一个父类，但是一个父类可以有多个子类</p>
+<h5 id="继承的作用"><a href="#继承的作用" class="headerlink" title="继承的作用"></a>继承的作用</h5><p>提高吗的重用性。一个源文件中可以包含多个类，但是只能有一个类带public，而且带public访问修饰符的类的类名要和源文件的文件名相同，main方法也要写在带public的类中。</p>
+<p>当创建子类对象时，一定会先执行父类的构造方法创建父类对象，然后在调用子类的构造方法创建子类的对象。而且在创建子类的对象时无论是调用有参数还是无参数的构造方法，JVM都会默认代用父类的五参数的构造方法创建父类的对象。</p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>多态就是指同一事物在不同情况下的多种表现形式</p>
+<p>多态的表现形式有：方法重写、方法重载、接口和接口的继承、类和类的继承</p>
+<h5 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h5><p>在同一个类中，有多个方法名相同，单参数列表不同的方法，这就是方法的重载，参数列表的不同包括：参数个数、类型、顺序的不同，普通方法和构造方法都可重载，方法重载会根据传递的参数来决定调用哪个方法，返回值不同，其他都相同的情况下是构不成方法的重载的</p>
+<h5 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h5><p>发生在子类继承父类的关系中，父类的方法被子类继承，方法名、返回值类型、参数完全一样，但是方法体不一样，那么说明父类中的该方法被子类重写了。</p>
+<p>目的：当父类中的方法无法满足子类的需求时，那么子类可以对父类的方法进行扩展</p>
+<p><strong>方法重写子类的访问修饰符范围不能缩小</strong></p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
       </tags>
   </entry>
 </search>
