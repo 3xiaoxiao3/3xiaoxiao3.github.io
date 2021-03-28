@@ -496,7 +496,7 @@
 <li>同一个页面，只需要一个TCP慢连接的过程</li>
 <li>可以并行交错的发送请求且互不影响</li>
 </ol>
-<h5 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h5><p>服务端 新建”流”主动向客户端发送消息，提前推送客户端需要的静态资源，减少等待的延迟</p>
+<h5 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h5><p>服务端新建”流”主动向客户端发送消息，提前推送客户端需要的静态资源，减少等待的延迟</p>
 <h5 id="提高安全性"><a href="#提高安全性" class="headerlink" title="提高安全性"></a>提高安全性</h5><p>HTTP2支持使用https进行加密传输</p>
 <h3 id="缺陷-1"><a href="#缺陷-1" class="headerlink" title="缺陷"></a>缺陷</h3><ol>
 <li><p><strong>TCP+TLS建立连接的时间是主要瓶颈</strong></p>
@@ -800,6 +800,7 @@
 <p>当创建子类对象时，一定会先执行父类的构造方法创建父类对象，然后在调用子类的构造方法创建子类的对象。而且在创建子类的对象时无论是调用有参数还是无参数的构造方法，JVM都会默认代用父类的五参数的构造方法创建父类的对象。</p>
 <h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>多态就是指同一事物在不同情况下的多种表现形式</p>
 <p>多态的表现形式有：方法重写、方法重载、接口和接口的继承、类和类的继承</p>
+<h5 id="多态的实现机制"><a href="#多态的实现机制" class="headerlink" title="多态的实现机制"></a>多态的实现机制</h5><p>Java多态的实现机制是父类或者接口定义的引用变量可以指向子类或者实现类的实例对象，而程序调用方法在运行期才动态绑定，这就是引用变量锁指向的具体实现对象的方法，也就是内存里正在运行的那个对象的方法，而不是引用变量的类型中定义的方法。</p>
 <h5 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h5><p>在同一个类中，有多个方法名相同，单参数列表不同的方法，这就是方法的重载，参数列表的不同包括：参数个数、类型、顺序的不同，普通方法和构造方法都可重载，方法重载会根据传递的参数来决定调用哪个方法，返回值不同，其他都相同的情况下是构不成方法的重载的</p>
 <h5 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h5><p>发生在子类继承父类的关系中，父类的方法被子类继承，方法名、返回值类型、参数完全一样，但是方法体不一样，那么说明父类中的该方法被子类重写了。</p>
 <p>目的：当父类中的方法无法满足子类的需求时，那么子类可以对父类的方法进行扩展</p>
@@ -823,6 +824,90 @@
 ]]></content>
       <tags>
         <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java-final关键字</title>
+    <url>/2021/03/26/Java-final%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <content><![CDATA[<p>final作为Java中的关键字，可以用于修饰类、方法、参数和变量</p>
+<span id="more"></span>
+
+<h4 id="final修饰类"><a href="#final修饰类" class="headerlink" title="final修饰类"></a>final修饰类</h4><p>当用final修饰一个类时，标明这个类不能被继承。也就是说，如果一个类不需要有子类，类的细节不允许改变，并且确信这个类不会再被扩展，那么就可以使用final进行修饰</p>
+<p>注意：被final修饰的类，类中的成员变量可以根据自己的实际需要设计为final。</p>
+<p>final类中的成员方法都会被隐式的指定为final方法。</p>
+<h4 id="final修饰方法"><a href="#final修饰方法" class="headerlink" title="final修饰方法"></a>final修饰方法</h4><p>如果一个类不允许其子类覆盖某个方法，则可以把这个方法声明为final方法。可以将方法锁定，防止任何继承类修改它的意义和实现。</p>
+<h4 id="final修饰变量"><a href="#final修饰变量" class="headerlink" title="final修饰变量"></a>final修饰变量</h4><p>用final修饰的变量表示常量，只能被赋值一次，赋值后无法改变。</p>
+<p>当final修饰一个基本数据类型时，表示该基本数据类型的值一旦在初始化后便不能发生变化</p>
+<p>如果final修饰一个引用类型时，则再起初始化之后便不能再让其只想其他对象了，但该引用所指向的对象的内容是可以发生变化的。因为引用的值是一个地址，final要求值，即地址的值不发生变化</p>
+<p>final修饰一个成员变量(属性)，必须要显式初始化。一共有两种初始化方式：一种是在变量声明的时候初始化；第二种是在声明变量的时候不赋初值，但是要在这个变量所在的类的所有构造函数中队这个变量赋初值。</p>
+<h4 id="final修饰参数"><a href="#final修饰参数" class="headerlink" title="final修饰参数"></a>final修饰参数</h4><p>当函数的参数为final类型时，说明该参数是只读型的，即你可以读取使用该参数，但是无法改变该参数的值</p>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java-static关键字</title>
+    <url>/2021/03/26/Java-static%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <content><![CDATA[<p>​    static是静态修饰符，可以用来修饰成员变量和成员方法，也可以形成静态static代码块。</p>
+<span id="more"></span>
+
+<h4 id="static变量"><a href="#static变量" class="headerlink" title="static变量"></a>static变量</h4><p>static修饰的变量被称为静态变量，没有用static修饰的变量被称为实例变量，两者之间的区别是：</p>
+<p>​    静态变量是随着类加载时被完成初始化的，它在内存中仅有一个，且JVM也只会为其分配一次内存，同时类的所有实例都共享静态变量，可以直接通过类名来访问它。</p>
+<p>​    而实例变量是伴随着实例的，每创建一个实例就会产生一个实例变量，并随着实例的消失而消失。</p>
+<h5 id="什么时候会使用static修饰变量"><a href="#什么时候会使用static修饰变量" class="headerlink" title="什么时候会使用static修饰变量"></a>什么时候会使用static修饰变量</h5><ol>
+<li>当分析对象中所具备的成员变量的值都是相同的，那么这个成员就可以被static修饰。</li>
+<li>只要数据在对象中都是不同的，就是对象的特有数据，必须储存在对象中，是非静态的。</li>
+<li>如果是相同的数据，对象不需要做修改，只需要使用即可，不需要储存在对象中，是静态的。    </li>
+</ol>
+<h4 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h4><p>​    静态方法可以直接通过类名调用，任何的实例也都可以调用，因此静态方法中不能使用this或super                                                                                                                                                                                                                                                                                             关键字，不能直接访问所属类的实例变量和实例方法，只能访问所属类的静态成员变量和成员方法。因为static方法独立于任何实例，因此static方法必须被实现，而不能被抽象的abstract所修饰。</p>
+<h5 id="什么时候会使用static修饰方法"><a href="#什么时候会使用static修饰方法" class="headerlink" title="什么时候会使用static修饰方法"></a>什么时候会使用static修饰方法</h5><p>​    从源代码看，该功能是否需要访问非静态的成员变量，如果需要，该功能就是非静态的。如果不需要，就可以将该功能定义成静态的。当然，也可以定义成非静态的，但是非静态需要被对象调用，仅创建对象是没有意义的。</p>
+<h5 id="在使用静态方法的时候需要注意的是"><a href="#在使用静态方法的时候需要注意的是" class="headerlink" title="在使用静态方法的时候需要注意的是"></a>在使用静态方法的时候需要注意的是</h5><p>​    <strong>在静态方法里只能直接调用同类中其他的静态成员(包括变量和方法)，而不能直接访问类中的非静态成员</strong>。这是因为，对于非静态的方法和变量，需要先创建类的实例对象后才可使用，而静态方法在使用前不用创建任何对象。</p>
+<p>​    静态方法不能以任何形式引用this或super关键字，因为静态方法在使用前不用创建任何实例对象，当静态方法调用时，this所引用的对象根本没有产生。</p>
+<h4 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h4><p>static代码块也叫静态代码块，是在类中独立于类成员的static语句块，可以有多个，位置可以随意放，它不在任何的方法体内，JVM加载类时会执行这些静态的代码块，如果static代码块有多个，JVM将按照它们在类中出现的先后顺序依次执行它们</p>
+<h5 id="static代码块和static方法的使用区别"><a href="#static代码块和static方法的使用区别" class="headerlink" title="static代码块和static方法的使用区别"></a>static代码块和static方法的使用区别</h5><p>如果有些代码必须在项目启动的时候就执行，就需要使用静态代码块，这种代码是主动执行的；需要在项目启动的时候就初始化但是不执行，在不创建对象的情况下，可以供其他程序调用，而在调用的时候才执行，这需要使用静态方法，这种代码是被动执行的。静态方法在类加载的时候就已经加载，可以用类名直接调用。</p>
+<p><strong>静态代码块和静态方法的区别是</strong>：</p>
+<ul>
+<li>静态代码块是自动执行的</li>
+<li>静态方法是被调用的时候才执行的</li>
+<li>静态方法：如果我们在程序编写的时候需要一个不实例化对象就可以调用的 方法，我们就可以使用静态方法，具体实现是在方法前面加上static</li>
+</ul>
+<h4 id="static的局限"><a href="#static的局限" class="headerlink" title="static的局限"></a>static的局限</h4><ol>
+<li>它只能调用static变量</li>
+<li>只能调用static方法</li>
+<li>不能以任何形式引用this、super</li>
+<li>static变量在定义时必须要进行初始化，且初始化时间要早于非静态变量</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>三七互娱一面面试记录</title>
+    <url>/2021/03/28/%E4%B8%89%E4%B8%83%E4%BA%92%E5%A8%B1%E4%B8%80%E9%9D%A2%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>三七互娱一面面试记录</p>
+<span id="more"></span>
+
+<ol>
+<li>final可以修饰什么，有什么用？</li>
+<li>什么时候需要用final修饰一个变量？</li>
+<li>static可以修饰什么，有什么用？</li>
+<li>String和StringBuffer和StringBuilder的区别？</li>
+<li>说一种java中的锁？</li>
+<li>乐观锁的实现方法？</li>
+<li>CAS自旋原理？</li>
+<li>三次握手四次挥手过程？</li>
+<li>最近的项目使用过哪些技术？</li>
+<li>databinding为什么能让代码中不使用findViewById()？</li>
+<li>为什么使用okhttp？</li>
+<li>职业规划？</li>
+<li>毕设做的什么项目？</li>
+<li>反问环节</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>面试记录</tag>
       </tags>
   </entry>
 </search>
