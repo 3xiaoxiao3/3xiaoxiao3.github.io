@@ -910,4 +910,17 @@
         <tag>面试记录</tag>
       </tags>
   </entry>
+  <entry>
+    <title>leancloud获取ErrorCode方法</title>
+    <url>/2021/04/05/leancloud%E8%8E%B7%E5%8F%96ErrorCode%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>在开发中不应该直接把ErrorMessage提示给用户，可以通过获取ErrorCode经过处理后提示给用户。</p>
+<span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AVException avException = <span class="keyword">new</span> AVException(e);</span><br><span class="line">        <span class="keyword">int</span> code = avException.getCode();</span><br><span class="line">        JSONObject errorcode = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            errorcode.put(<span class="string">&quot;code&quot;</span>,code);</span><br><span class="line">            errorcode.put(<span class="string">&quot;message&quot;</span>,e.getMessage());</span><br><span class="line">            <span class="keyword">switch</span> (errorcode.getInt(<span class="string">&quot;code&quot;</span>))&#123;</span><br><span class="line">                <span class="comment">//在这里写处理errorcode的方法</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (JSONException jsonException) &#123;</span><br><span class="line">            jsonException.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Android开发</tag>
+      </tags>
+  </entry>
 </search>
