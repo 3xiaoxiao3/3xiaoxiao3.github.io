@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,12 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/04/index.html">
+<meta name="description" content="GC如何判断一个对象为“垃圾”的​    Java堆内存中存放着几乎所有的对象实例，垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还“存活”着，哪些已经“死去”。那么GC具体可以通过哪些手段来判断一个对象已经“死去”的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java的GC垃圾回收算法">
+<meta property="og:url" content="http://example.com/2021/04/26/GC%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA%E2%80%9C%E5%9E%83%E5%9C%BE%E2%80%9D%E7%9A%84/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="GC如何判断一个对象为“垃圾”的​    Java堆内存中存放着几乎所有的对象实例，垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还“存活”着，哪些已经“死去”。那么GC具体可以通过哪些手段来判断一个对象已经“死去”的">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-04-26T01:47:05.000Z">
+<meta property="article:modified_time" content="2021-04-26T02:50:33.296Z">
 <meta property="article:author" content="小小">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/archives/2021/04/"/>
+  <link rel="canonical" href="http://example.com/2021/04/26/GC如何判断一个对象为“垃圾”的/"/>
 
 
 
 
 
-  <title>归档 | Hexo</title>
+  <title>Java的GC垃圾回收算法 | Hexo</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,148 +273,175 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/26/GC%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA%E2%80%9C%E5%9E%83%E5%9C%BE%E2%80%9D%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Java的GC垃圾回收算法</h1>
         
+
+        <div class="post-meta">
+		
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-26T09:47:05+08:00">
+                2021-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 27 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2021">2021</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/04/26/GC%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA%E2%80%9C%E5%9E%83%E5%9C%BE%E2%80%9D%E7%9A%84/" itemprop="url">
-              
-                <span itemprop="name">Java的GC垃圾回收算法</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-04-26T09:47:05+08:00"
-              content="2021-04-26" >
-          04-26
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/04/16/kotlin%E5%AD%A6%E4%B9%A0-ViewBinding%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
-              
-                <span itemprop="name">Kotlin学习-ViewBinding的使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-04-16T13:45:22+08:00"
-              content="2021-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h3 id="GC如何判断一个对象为“垃圾”的"><a href="#GC如何判断一个对象为“垃圾”的" class="headerlink" title="GC如何判断一个对象为“垃圾”的"></a>GC如何判断一个对象为“垃圾”的</h3><p>​    Java堆内存中存放着几乎所有的对象实例，垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还“存活”着，哪些已经“死去”。那么GC具体可以通过哪些手段来判断一个对象已经“死去”的</p>
+<span id="more"></span>
 
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/04/05/leancloud%E8%8E%B7%E5%8F%96ErrorCode%E6%96%B9%E6%B3%95/" itemprop="url">
-              
-                <span itemprop="name">leancloud获取ErrorCode方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-04-05T12:03:24+08:00"
-              content="2021-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<h4 id="1、引用计数算法"><a href="#1、引用计数算法" class="headerlink" title="1、引用计数算法"></a>1、引用计数算法</h4><p>​    该算法通过判断对象的引用数量来决定对象是否可以被回收，在此机制下，堆中的每个对象都存在一个引用计数器，当一个对象创建后被分配一个引用之后则对应的引用计数器+1，当引用完成后则引用计数器响应的-1，当某个对象的引用计数器为0的时候，则会被虚拟机作为垃圾进行回收，并释放其锁占用的内存空间。</p>
+<p><strong>优点</strong>：引用计数算法的执行效率高，程序执行所受的影响较小。</p>
+<p><strong>缺点</strong>：无法检测出循环引用(父对象引用子对象，子对象引用父对象)，其内存空间无法被回收从而导致内存泄漏。</p>
+<h4 id="2、可达性分析算法"><a href="#2、可达性分析算法" class="headerlink" title="2、可达性分析算法"></a>2、可达性分析算法</h4><p>​    该算法是通过判断对象的引用链是否可达来决定对象是否会被作为垃圾进行回收。</p>
+<p>​    该算法将程序的所有引用作为一张图，通过将一些GC Roots对象作为起始点，从这些节点开始向下搜索，搜索所做过的路径被称为引用链，如果某个GC Roots没有与任何引用链相连，则称GC Roots到该对象为不可达，此时该对象可以作为垃圾进行回收，然后释放其所占据的内存空间。</p>
+<h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h3><h4 id="1、标记-清除算法"><a href="#1、标记-清除算法" class="headerlink" title="1、标记-清除算法"></a>1、标记-清除算法</h4><p>​    最基础的垃圾回收算法，分为两个阶段：标记和清除。标记阶段标记出所有需要回收的对象，清除阶段回收被标记的对象所占用的空间。</p>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>执行效率不稳定：堆中有大量对象，会进行大量的标记和清除</li>
+<li>内部的碎片化问题：标记和清除之后会产生大量的不连续的内存碎片</li>
+</ul>
+<h4 id="2、复制算法"><a href="#2、复制算法" class="headerlink" title="2、复制算法"></a>2、复制算法</h4><p>​    半区复制的垃圾回收算法</p>
+<p>​    将可用内存按容量划分成大小相等的两块，每次使用其中的一块，当这一块的内存用完了，就将还活着的对象复制到另一块上面，然后再把使用过的内存空间一次性清理掉</p>
+<p><strong>优点</strong>：不会产生内存碎片</p>
+<p><strong>缺点</strong>：只有一半内存可用，空间浪费太多</p>
+<h4 id="3、标记-整理算法"><a href="#3、标记-整理算法" class="headerlink" title="3、标记-整理算法"></a>3、标记-整理算法</h4><p>​    标记过程仍然使用标记-清除，后续步骤将所有存活的对象都向内存空间一端一移动，然后清理掉边界以外的内存</p>
+<p><strong>优点</strong>：没有内存碎片的产生</p>
+<p><strong>缺点</strong>：在每次移动的过程中，尤其是对老年代这种存活对象多的区域，会导致效率的降低</p>
+<h4 id="4、分代收集算法"><a href="#4、分代收集算法" class="headerlink" title="4、分代收集算法"></a>4、分代收集算法</h4><p>​    分代收集算法是目前大部分JVM所采用的方法，其核心思想是根据对象存活的不同生命周期将内存划分为不同的域，一般情况下将GC堆划分为老生代和新生代。</p>
+<p>​    老生代的特点是每次垃圾回收时只有少量对象需要被回收，新生代的特点是每次垃圾回收时都有大量垃圾需要被回收，因此可以根据不同的区域选择不同的算法。</p>
+<p>​    目前大部分JVM的GC对于新生代都采用复制算法，因为新生代中每次垃圾回收都要回收大部分对象，即要复制的操作比较少，但通常不是按照1:1来划分新生代。</p>
+<p>​    一般将新生代划分为一块较大的Eden空间和两个较小的Survivor空间，每次使用Eden空间和其中的一块Survivor空间，当进行回收时，将该两块空间中还存活的对象复制到另一块Survivor空间中。</p>
+<p>​    而老生代因为每次都只回收少量对象，因而采用标记-整理算法。</p>
+<p>在进行GC后，当对象在Survivor区躲过一次GC后，其年龄就会+1.默认情况下年龄达到15的对象便会被移到老生代中。</p>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/16/kotlin%E5%AD%A6%E4%B9%A0-ViewBinding%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="Kotlin学习-ViewBinding的使用">
+                <i class="fa fa-chevron-left"></i> Kotlin学习-ViewBinding的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -417,6 +449,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -437,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,6 +543,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GC%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA%E2%80%9C%E5%9E%83%E5%9C%BE%E2%80%9D%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">GC如何判断一个对象为“垃圾”的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">1、引用计数算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2、可达性分析算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">1、标记-清除算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2、复制算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">3、标记-整理算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">4、分代收集算法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -631,6 +692,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
